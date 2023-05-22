@@ -2,14 +2,14 @@ package com.Enkpay.alltransctionsPOS;
 
 import com.Enkpay.alltransctionsPOS.nibbs.prep.DownloadNibsKeys;
 import generalModel.KeyHolder;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class AlltransctionPosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AlltransctionPosApplication.class, args);
+//		SpringApplication.run(AlltransctionPosApplication.class, args);
 
 		try {
 //			KeyHolder keyHolder=  new DownloadNibsKeys().download();
