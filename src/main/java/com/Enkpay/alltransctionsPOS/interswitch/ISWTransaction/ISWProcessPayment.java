@@ -9,7 +9,6 @@ import com.Enkpay.alltransctionsPOS.interswitch.models.TransferRequest;
 import com.Enkpay.alltransctionsPOS.utils.*;
 import enums.CVMETHOD;
 import generalModel.TransactionResponse;
-import interfaces.OnTransactionCompleted;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import retrofit2.Call;
@@ -29,12 +28,12 @@ public class ISWProcessPayment {
     private Long otherAmount = 0L;
     java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
 
-    public void ProcessPayment(CardData cardData, TransactionRequestData transRequestData, PosTransactions.TransactionResult transactionResult) {
+    public void ProcessPayment(final CardData cardData, final TransactionRequestData transRequestData, final PosTransactions.TransactionResult transactionResult) {
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
-        Long transactionTime = System.currentTimeMillis();
-        IsoTimeManager timeMgr = new IsoTimeManager();
+        final Long transactionTime = System.currentTimeMillis();
+        final IsoTimeManager timeMgr = new IsoTimeManager();
 
         //set value
         TransferRequest transferRequest = new TransferRequest();
@@ -131,12 +130,12 @@ public class ISWProcessPayment {
           new RetrofitBuilder().iswTransactionClientTest().performTransaction(
                  "Bearer "+transRequestData.getIswParameters().getToken() ,
                  transferRequest
-         ).enqueue(new Callback<>() {
+         ).enqueue(new Callback() {
               @Override
-              public void onResponse(Call<CashOutResponnse> call, Response<CashOutResponnse> response) {
+              public void onResponse(Call call, Response response) {
                   if (response.isSuccessful()) {
                       // handle successful response
-                      CashOutResponnse cashOutResponnse = response.body();
+                      CashOutResponnse cashOutResponnse = (CashOutResponnse) response.body();
                       String stan ;
                       if(APPUtils.isEmpty(transRequestData.getSTAN())){
                           stan= transRequestData.getSTAN();
@@ -171,7 +170,7 @@ public class ISWProcessPayment {
               }
 
               @Override
-              public void onFailure(Call<CashOutResponnse> call, Throwable throwable) {
+              public void onFailure(Call call, Throwable throwable) {
 
                   CashOutResponnse cashOutResponnse= new CashOutResponnse();
                   cashOutResponnse.setAmountAuthorized( ISWProcessPayment.this.amount);
