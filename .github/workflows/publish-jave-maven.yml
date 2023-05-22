@@ -23,5 +23,5 @@ jobs:
       - name: Publish package
         run: mvn --batch-mode deploy
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
 
