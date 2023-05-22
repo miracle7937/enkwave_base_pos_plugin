@@ -18,13 +18,10 @@
 	</properties>
 
 	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
 		<repository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/miracle7937/enkwave_base_pos_plugin</url>
 		</repository>
 	</distributionManagement>
 	<dependencies>
@@ -111,10 +108,6 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-		<repository>
-			<id>simpleframework-repo</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -136,3 +129,4 @@
 	</pluginRepositories>
 
 </project>
+<!-- ghp_yx3K3UU0 cHRbpxOYD34jlaYPP8Gf7F4MWtqn-->
