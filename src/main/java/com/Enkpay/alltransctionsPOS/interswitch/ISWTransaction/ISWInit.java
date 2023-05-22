@@ -11,7 +11,7 @@ import retrofit2.Response;
 import services.KeyValuePairStorage;
 
 public class ISWInit {
-    public  void  setUpIswToken(String mid,String terminalID, PosTransactions.IntResult onISWTokenComplete){
+    public  void  setUpIswToken(String mid, String terminalID, final PosTransactions.IntResult onISWTokenComplete){
         TokenPassportRequest tokenPassportRequest     = new TokenPassportRequest(mid, terminalID);
 
         new RetrofitBuilder().getTokenClient().getToken(tokenPassportRequest).enqueue(new Callback<TokenPassportResponse>() {
@@ -27,7 +27,7 @@ public class ISWInit {
 
             @Override
             public void onFailure(Call<TokenPassportResponse> call, Throwable throwable) {
-                onISWTokenComplete.onError(throwable.getLocalizedMessage());
+                 onISWTokenComplete.onError(throwable.getLocalizedMessage());
 
             }
         });

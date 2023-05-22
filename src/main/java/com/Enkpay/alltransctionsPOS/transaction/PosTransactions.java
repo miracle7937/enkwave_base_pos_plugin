@@ -19,6 +19,15 @@ import retrofit2.Response;
 import services.KeyValuePairStorage;
 
 public class PosTransactions {
+    final HostConfig hostConfig;
+    final CardData cardData;
+    final  TransactionRequestData requestData;
+
+    public PosTransactions(HostConfig hostConfig, CardData cardData, TransactionRequestData requestData) {
+        this.hostConfig = hostConfig;
+        this.cardData = cardData;
+        this.requestData = requestData;
+    }
 
     public void  init(IntResult intResult){
         if(true){
@@ -31,13 +40,13 @@ public class PosTransactions {
 
 
 
-    public  void  processTransaction(HostConfig hostConfig,  CardData cardData,TransactionRequestData requestData){
+    public  void  processTransaction(){
         selectTransaction(hostConfig,cardData,requestData,new TransactionResult() {
             @Override
             public void onSuccess(TransactionResponse response) {
 
                 // fundwallet if successfull
-                FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(cardData, requestData,hostConfig );
+                FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig );
                 new RetrofitBuilder().isFundUserWallet("").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
                     @Override
                     public void onResponse(Call<FundWalletResponseData> call, Response<FundWalletResponseData> response) {
