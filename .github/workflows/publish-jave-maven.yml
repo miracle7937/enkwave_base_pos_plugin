@@ -24,7 +24,7 @@ jobs:
       - name: Configure settings.xml
         run: |
           mkdir -p ~/.m2
-          echo "<settings><servers><server><id>github</id><username>ebukamiracle35@gmail.com</username><password>\${env.JAVA_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+          echo "<settings><servers><server><id>github</id><username>ebukamiracle35@gmail.com</username><password>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</password></server></servers></settings>" > ~/.m2/settings.xml
 
       - name: Publish package
         run: mvn --batch-mode deploy
