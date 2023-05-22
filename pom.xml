@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Enkpay</groupId>
-	<artifactId>alltransctionPOS</artifactId>
+	<artifactId>alltransction_pos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>alltransctionPOS</name>
+	<name>alltransction_pos</name>
 	<description>A springboot pos </description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
