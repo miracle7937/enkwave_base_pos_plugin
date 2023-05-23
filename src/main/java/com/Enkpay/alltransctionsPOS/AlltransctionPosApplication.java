@@ -1,6 +1,10 @@
 package com.Enkpay.alltransctionsPOS;
 
+import Var.Constants;
 import com.Enkpay.alltransctionsPOS.nibbs.prep.DownloadNibsKeys;
+import com.Enkpay.alltransctionsPOS.nibbs.prep.ParametersDownload;
+import enums.IsoAccountType;
+import enums.TransactionType;
 import generalModel.KeyHolder;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,14 +16,14 @@ public class AlltransctionPosApplication {
 //		SpringApplication.run(AlltransctionPosApplication.class, args);
 
 		try {
-//			KeyHolder keyHolder=  new DownloadNibsKeys().download();
+		 new DownloadNibsKeys().download(null);
 //			new ParametersDownload().download(
 //					TransactionType.TERMINAL_PARAMETER_DOWNLOAD,
 //					"8767B834",
 //					keyHolder.clearSessionKey(),
 //					Constants.RESPONSE_CODE_39,
 //					IsoAccountType.DEFAULT_UNSPECIFIED
-//
+
 //);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

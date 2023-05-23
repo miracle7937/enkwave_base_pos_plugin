@@ -22,7 +22,7 @@ public class APPUtils {
 
             m.update(msg.getBytes("UTF-8"), 0, msg.length());
             hashText = (new BigInteger(1, m.digest())).toString(16);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException var9) {
+        } catch (Exception var9) {
             var9.printStackTrace();
         }
         if (hashText.length() < 64) {
