@@ -22,9 +22,13 @@ public class IsoAdapter {
         msgFactory.setIgnoreLastMissingField(true);
         InputStream inputStream = null;
         try {
-             inputStream = new FileInputStream( new File("config.xml "));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            File configFile = new File("config.xml");
+            configFile.setReadable(true);
+            configFile.setWritable(true);
+            configFile.setExecutable(true);
+            inputStream = new FileInputStream( configFile);
 
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             ConfigParser.configureFromReader(msgFactory, reader);
             IsoMessage isoMessage = msgFactory.parseMessage(dataByteArray, 0);
             logIsoMessage(isoMessage);
@@ -32,6 +36,7 @@ public class IsoAdapter {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
+                    System.out.println("The config.xml file was not found.");
                     e.printStackTrace();
                 }
             }
