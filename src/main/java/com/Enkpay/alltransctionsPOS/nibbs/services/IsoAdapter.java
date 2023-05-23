@@ -22,12 +22,14 @@ public class IsoAdapter {
         msgFactory.setIgnoreLastMissingField(true);
         InputStream inputStream = null;
         try {
+             inputStream = IsoAdapter.class.getResourceAsStream("/config.xml");
 
-            File configFile = new File("src/main/java/resources/config.xml");
-            configFile.setReadable(true);
-            configFile.setWritable(true);
-            configFile.setExecutable(true);
-            inputStream = new FileInputStream(configFile);
+
+//            File configFile = new File("src/main/java/resources/config.xml");
+//            configFile.setReadable(true);
+//            configFile.setWritable(true);
+//            configFile.setExecutable(true);
+//            inputStream = new FileInputStream(configFile);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             ConfigParser.configureFromReader(msgFactory, reader);
