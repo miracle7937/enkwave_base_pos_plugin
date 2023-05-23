@@ -3,8 +3,12 @@ package services;
 import Var.Debug;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class KeyValuePairStorage {
     private static final String FILE_NAME = "key_value_storage.txt";
@@ -59,13 +63,14 @@ public class KeyValuePairStorage {
     private void load() {
        try {
            File file = new File(FILE_NAME);
-           file.setReadable(true);
-           file.setWritable(true);
-           file.setExecutable(true);
+
            if (!file.exists()) {
                return;
            }
-
+           Set<PosixFilePermission> permissions = new HashSet();
+           permissions.add(PosixFilePermission.OWNER_READ);
+           permissions.add(PosixFilePermission.OWNER_WRITE);
+           Files.setPosixFilePermissions(file.toPath(), permissions);
            FileReader reader = new FileReader(file);
            BufferedReader bufferedReader = new BufferedReader(reader);
            String line;
