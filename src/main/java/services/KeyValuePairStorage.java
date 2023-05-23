@@ -11,10 +11,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.prefs.Preferences;
 
 public class KeyValuePairStorage {
-        Path userHomeDir = Paths.get("").toAbsolutePath();
-    String filePath = userHomeDir.toString() + "/src/main/savedata.txt";
+    Preferences prefs;
+
     private Map<String, String> data;
     private static KeyValuePairStorage instance;
     public  static KeyValuePairStorage getInstance() {
@@ -25,67 +26,66 @@ public class KeyValuePairStorage {
     }
 
     public KeyValuePairStorage() {
-        data = new HashMap();
-        load();
+   this.prefs = Preferences.userNodeForPackage(KeyValuePairStorage.class);
     }
 
     public void put(String key, String value) {
-        data.put(key, value);
-        save();
+        this.prefs .put(key, value);
+
     }
     public void putLong(String key, Long value) {
-        data.put(key,String.valueOf( value));
-        save();
+        this.prefs.putLong(key,value);
+
     }
 
     public String get(String key) {
-        return data.get(key);
+        return this.prefs.get(key, "");
     }
     public Long getLong(String key) {
-        return Long.parseLong(data.get(key));
+        return this.prefs.getLong(key,0);
     }
 
     public void remove(String key) {
-        data.remove(key);
+        this.prefs.remove(key);
     }
-    private void save()  {
-     try {
-         FileWriter writer = new FileWriter(filePath);
-         for (Map.Entry<String, String> entry : data.entrySet()) {
-             writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
-         }
-         writer.close();
-         Debug.print("Data Saved");
-     }catch (IOException exception){
-         Debug.print(exception.getLocalizedMessage());
-     }
-    }
+//    private void save()  {
+//     try {
+//         FileWriter writer = new FileWriter(filePath);
+//         for (Map.Entry<String, String> entry : data.entrySet()) {
+//             writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
+//         }
+//         writer.close();
+//         Debug.print("Data Saved");
+//     }catch (IOException exception){
+//         Debug.print(exception.getLocalizedMessage());
+//     }
+//    }
 
 
-    private void load() {
-       try {
-
-           File file = new File(filePath);
-
-           if (!file.exists()) {
-               if (file.createNewFile()) {
-                   Debug.print("File created successfully.");
-               } else {
-                   Debug.print("Failed to create file. File already exists.");
-               }
-           }
-
-           FileReader reader = new FileReader(file);
-           BufferedReader bufferedReader = new BufferedReader(reader);
-           String line;
-           while ((line = bufferedReader.readLine()) != null) {
-               String[] parts = line.split("=");
-               data.put(parts[0], parts[1]);
-           }
-
-           reader.close();
-       }catch (IOException exception){
-
-       }
-    }
+//    private void load() {
+//       try {
+//
+//           File file = new File(filePath);
+//
+//           if (!file.exists()) {
+//               if (file.createNewFile()) {
+//                   Debug.print("File created successfully.");
+//               } else {
+//                   Debug.print("Failed to create file. File already exists.");
+//               }
+//           }
+//
+//           FileReader reader = new FileReader(file);
+//           BufferedReader bufferedReader = new BufferedReader(reader);
+//           String line;
+//           while ((line = bufferedReader.readLine()) != null) {
+//               String[] parts = line.split("=");
+//               data.put(parts[0], parts[1]);
+//           }
+//
+//           reader.close();
+//       }catch (IOException exception){
+//
+//       }
+//    }
 }

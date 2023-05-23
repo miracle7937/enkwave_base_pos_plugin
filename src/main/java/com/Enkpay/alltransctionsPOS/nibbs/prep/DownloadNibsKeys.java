@@ -48,6 +48,7 @@ public class DownloadNibsKeys {
       loadedStorage.put(Constants.PREF_KEYHOLDER, new Gson().toJson(keyHolder));
       loadedStorage.put(Constants.PREF_CONFIG_DATA, new Gson().toJson(configData));
       loadedStorage.putLong(Constants.LAST_POS_CONFIGURATION_TIME, System.currentTimeMillis());
+      Debug.print("Fetch from file " +  loadedStorage.get(Constants.PREF_KEYHOLDER));
             if(intResult != null){
                 intResult.onSuccess();
             }
