@@ -22,6 +22,7 @@ public class IsoAdapter {
         msgFactory.setIgnoreLastMissingField(true);
         InputStream inputStream = null;
         try {
+
             File configFile = new File("config.xml");
             configFile.setReadable(true);
             configFile.setWritable(true);
