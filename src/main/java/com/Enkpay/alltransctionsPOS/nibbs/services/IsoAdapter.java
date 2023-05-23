@@ -23,7 +23,7 @@ public class IsoAdapter {
         InputStream inputStream = null;
         try {
 
-            File configFile = new File("config.xml");
+            File configFile = new File("src/main/java/config.xml");
             configFile.setReadable(true);
             configFile.setWritable(true);
             configFile.setExecutable(true);
