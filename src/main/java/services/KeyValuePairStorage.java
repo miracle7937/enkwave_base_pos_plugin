@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class KeyValuePairStorage {
         Path userHomeDir = Paths.get("").toAbsolutePath();
-    String filePath = userHomeDir.toString() + "/savedata.txt";
+    String filePath = userHomeDir.toString() + "/src/main/savedata.txt";
     private Map<String, String> data;
     private static KeyValuePairStorage instance;
     public  static KeyValuePairStorage getInstance() {
