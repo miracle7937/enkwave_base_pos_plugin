@@ -1,3 +1,3 @@
-pref_config_data={"ctMkDatetime":"20230523171325","mid":"5562AB601325813","timeout":"60","currencyCode":"566","countryCode":"566","callHome":"60","mnl":"Xpress Payment SolutionIM           IMNG","mcc":"5666"}
-last_pos_configuration_time=1684858405443
-pref_keyholder={"id":1,"masterKey":"300EA247374E69035557DF7B64A7EE47","sessionKey":"496DF775312BC26A9870A34D7B9CE37C","pinKey":"12D82862C829C95221C73D96F8007999","posMode":"EPMS"}
+pref_config_data={"ctMkDatetime":"20230523173950","mid":"5562AB601325813","timeout":"60","currencyCode":"566","countryCode":"566","callHome":"60","mnl":"Xpress Payment SolutionIM           IMNG","mcc":"5666"}
+last_pos_configuration_time=1684859990398
+pref_keyholder={"id":1,"masterKey":"368766B43FBBFC958C31E4D9F461D633","sessionKey":"5E1FAAE53A9CB45B446DC2990A69004B","pinKey":"254D99BA050772F020F0A3C8293BEA97","posMode":"EPMS"}

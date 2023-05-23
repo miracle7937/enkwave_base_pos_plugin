@@ -4,6 +4,8 @@ import Var.Debug;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,8 +13,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class KeyValuePairStorage {
-    private static final String FILE_NAME = "key_value_storage.txt";
-
+        Path userHomeDir = Paths.get("").toAbsolutePath();
+    String filePath = userHomeDir.toString() + "/savedata.txt";
     private Map<String, String> data;
     private static KeyValuePairStorage instance;
     public  static KeyValuePairStorage getInstance() {
@@ -48,7 +50,7 @@ public class KeyValuePairStorage {
     }
     private void save()  {
      try {
-         FileWriter writer = new FileWriter(FILE_NAME);
+         FileWriter writer = new FileWriter(filePath);
          for (Map.Entry<String, String> entry : data.entrySet()) {
              writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
          }
@@ -62,15 +64,17 @@ public class KeyValuePairStorage {
 
     private void load() {
        try {
-           File file = new File(FILE_NAME);
+
+           File file = new File(filePath);
 
            if (!file.exists()) {
-               return;
+               if (file.createNewFile()) {
+                   Debug.print("File created successfully.");
+               } else {
+                   Debug.print("Failed to create file. File already exists.");
+               }
            }
-           Set<PosixFilePermission> permissions = new HashSet();
-           permissions.add(PosixFilePermission.OWNER_READ);
-           permissions.add(PosixFilePermission.OWNER_WRITE);
-           Files.setPosixFilePermissions(file.toPath(), permissions);
+
            FileReader reader = new FileReader(file);
            BufferedReader bufferedReader = new BufferedReader(reader);
            String line;
