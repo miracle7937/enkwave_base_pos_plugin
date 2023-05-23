@@ -2,10 +2,7 @@ package com.Enkpay.alltransctionsPOS.nibbs.services;
 
 import com.Enkpay.alltransctionsPOS.nibbs.model.NibsUtilityData;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
+import java.io.*;
 import java.net.BindException;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
@@ -17,6 +14,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.net.UnknownServiceException;
+import java.util.Arrays;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -59,7 +57,29 @@ public class SocketRequest {
 
             dataOut.write(isoStream);
 
-            responseArray = dataIn.readAllBytes();
+//            responseArray = dataIn.readAllBytes(); //comment this
+
+
+//add this to the project
+            ByteArrayOutputStream responseBuffer = new ByteArrayOutputStream();
+            int bytesRead;
+            byte[] buffer = new byte[1024];
+            while (true) {
+                try {
+                    bytesRead = dataIn.read(buffer);
+                    if (bytesRead == -1) {
+                        break; // End of stream
+                    }
+                    responseBuffer.write(buffer, 0, bytesRead);
+                } catch (EOFException ignored) {
+                    break; // End of stream reached
+                }
+            }
+
+            responseArray = responseBuffer.toByteArray();
+//end
+
+
         } catch (EOFException ignored) {
         } catch (SocketTimeoutException e) {
             throw new SocketTimeoutException("Connection timed out, failed to receive response from remote server");
