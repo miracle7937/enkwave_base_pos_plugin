@@ -19,7 +19,7 @@ public class KeyValuePairStorage {
     }
 
     public KeyValuePairStorage() {
-        data = new HashMap<>();
+        data = new HashMap();
         load();
     }
 
