@@ -59,6 +59,9 @@ public class KeyValuePairStorage {
     private void load() {
        try {
            File file = new File(FILE_NAME);
+           file.setReadable(true);
+           file.setWritable(true);
+           file.setExecutable(true);
            if (!file.exists()) {
                return;
            }

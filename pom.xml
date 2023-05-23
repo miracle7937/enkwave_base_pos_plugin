@@ -10,7 +10,7 @@
 <!--	</parent>-->
 	<groupId>com.enkpay</groupId>
 	<artifactId>alltransction_pos</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.9-SNAPSHOT</version>
 	<name>alltransction_pos</name>
 	<description>A springboot pos </description>
 <!--	<properties>-->
@@ -66,12 +66,13 @@
 			<artifactId>j8583</artifactId>
 			<version>1.17.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>jpos</groupId>
 			<artifactId>jpos</artifactId>
 			<scope>system</scope>
 			<version>1.0</version>
-			<systemPath>${basedir}/libs/jpos.jar</systemPath>
+			<systemPath>${basedir}/lib/jpos.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin.external.google</groupId>
@@ -84,7 +85,7 @@
 			<artifactId>bcprov-jdk15on-164</artifactId>
 			<scope>system</scope>
 			<version>1.0</version>
-			<systemPath>${basedir}/libs/bcprov-jdk15on-164.jar</systemPath>
+			<systemPath>${basedir}/lib/bcprov-jdk15on-164.jar</systemPath>
 		</dependency>
 	</dependencies>
 
