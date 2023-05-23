@@ -2,6 +2,7 @@ package com.Enkpay.alltransctionsPOS.transaction;
 
 import Var.Constants;
 import Var.DateUtils;
+import Var.Debug;
 import com.Enkpay.alltransctionsPOS.implementation.RetrofitBuilder;
 import com.Enkpay.alltransctionsPOS.interswitch.ISWTransaction.ISWInit;
 import com.Enkpay.alltransctionsPOS.interswitch.ISWTransaction.ISWProcessPayment;
@@ -31,7 +32,12 @@ public class PosTransactions {
 
     public void  init(IntResult intResult){
         if(true){
-            new DownloadNibsKeys().download(intResult);
+            boolean keyPassedTime=   DateUtils.hourPassed(7, KeyValuePairStorage.getInstance().getLong(Constants.LAST_POS_CONFIGURATION_TIME));
+            if(keyPassedTime){
+                new DownloadNibsKeys().download(intResult);
+            }else {
+                Debug.print("You cant get key because your current key haven't expired");
+            }
         }else{
         new ISWInit().setUpIswToken("","", intResult);
         }
