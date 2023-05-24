@@ -211,7 +211,7 @@ public class ProcessTransaction {
         byte[] field3 = processingCode.getBytes();
         packISO8583.setBit(3, field3, field3.length);
 
-        Long transactionAmount = (requestData.amount + requestData.otherAmount);
+        Long transactionAmount = (requestData.getAmount() + requestData.getOtherAmount());
         String paddedAmount = Utilities.padLeftZeros(transactionAmount.toString(), 12);
         byte[] field4 = paddedAmount.getBytes(); //check also
         packISO8583.setBit(4, field4, field4.length);

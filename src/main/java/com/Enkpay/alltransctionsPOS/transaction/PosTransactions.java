@@ -30,7 +30,7 @@ public class PosTransactions {
         this.requestData = requestData;
     }
 
-    public void  init(IntResult intResult){
+    public static void  init(IntResult intResult){
         if(true){
             boolean keyPassedTime=   DateUtils.hourPassed(7, KeyValuePairStorage.getInstance().getLong(Constants.LAST_POS_CONFIGURATION_TIME));
             if(keyPassedTime){

@@ -14,7 +14,7 @@ public class TransactionRequestData {
     public  String deviceNO;
     public TransactionType transactionType;
     public    Long amount;
-    public  Long otherAmount;
+    public  Long otherAmount =0L;
     public  Long refundAmount;
     public  IsoAccountType accountType = IsoAccountType.DEFAULT_UNSPECIFIED;
     public  String RRN;
