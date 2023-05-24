@@ -23,7 +23,6 @@ public class ProcessTransaction {
     final HostConfig hostConfig;
 
     public void process(CardData cardData, TransactionRequestData requestData, PosTransactions.TransactionResult transactionResult) {
-        Debug.print(TAG + "MIIIIIIIIIIIIIIIIIIIIIII: " + hostConfig.getKeyHolder().clearSessionKey());
 
         ISO8583 requestIsoMessage = setBaseFields(requestData, cardData, hostConfig.getConfigData());
 
@@ -60,6 +59,14 @@ public class ProcessTransaction {
         }
 
 
+        byte[] field123 = "510101511344101".getBytes();
+        requestIsoMessage.setBit(123, field123, field123.length);
+
+        byte use = 0x0;
+        char ch = (char) use;
+        byte[] field128 = Character.toString(ch).getBytes();
+        requestIsoMessage.setBit(128, field128, field128.length);
+
         ISO8583.sec = true;
         byte[] preUnmac = requestIsoMessage.getMacIso();
         Debug.print(TAG + " PRE ISO BEFORE MAC: " + new String(preUnmac));
@@ -78,7 +85,7 @@ public class ProcessTransaction {
             Debug.print(e.fillInStackTrace());
         }
 
-        byte[] field128 = gotten.getBytes();
+         field128 = gotten.getBytes();
         requestIsoMessage.setBit(128, field128, field128.length);
         ISO8583.sec = true;
         byte[] packData = requestIsoMessage.isotostr();
@@ -279,11 +286,11 @@ public class ProcessTransaction {
         packISO8583.setBit(26, field26, field26.length);
 
 
-        byte[] field28 = "D00000000".getBytes(); // check too Amount, transaction fee Good
+        byte[] field28 = "C00000000".getBytes(); // check too Amount, transaction fee Good
         packISO8583.setBit(28, field28, field28.length);
-
-        byte[] field30 = "C00000000".getBytes();
-        packISO8583.setBit(30, field30, field30.length);
+//
+//        byte[] field30 = "C00000000".getBytes();
+//        packISO8583.setBit(30, field30, field30.length);
 
 
         byte[] field32 = cardData.getTrack2Data().substring(0, 6).getBytes(); //track2Data.substring(0, 6); that the answer  // check too Acquiring institution id code
@@ -349,13 +356,9 @@ public class ProcessTransaction {
                 packISO8583.setBit(59, field59, field59.length);
             }
 
-            byte[] field123 = "510101511344101".getBytes(); // Good
-            packISO8583.setBit(123, field123, field123.length);
 
-            byte use = 0x0;
-            char ch = (char) use;
-            byte[] field128 = Character.toString(ch).getBytes();
-            packISO8583.setBit(128, field128, field128.length);
+
+
 
         }
         return packISO8583;
