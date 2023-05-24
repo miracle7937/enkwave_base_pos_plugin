@@ -73,6 +73,7 @@ public class ProcessTransaction {
             System.out.println(TAG + "MAC: " + gotten);
         } catch (Exception e) {
             e.printStackTrace();
+            Debug.print(e.fillInStackTrace());
         }
 
         byte[] field128 = gotten.getBytes();
