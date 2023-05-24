@@ -23,6 +23,7 @@ public class ProcessTransaction {
     final HostConfig hostConfig;
 
     public void process(CardData cardData, TransactionRequestData requestData, PosTransactions.TransactionResult transactionResult) {
+        Debug.print(TAG + "MIIIIIIIIIIIIIIIIIIIIIII: " + hostConfig.getKeyHolder().clearSessionKey());
 
         ISO8583 requestIsoMessage = setBaseFields(requestData, cardData, hostConfig.getConfigData());
 
