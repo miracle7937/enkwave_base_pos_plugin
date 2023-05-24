@@ -61,14 +61,15 @@ public class ProcessTransaction {
 
         ISO8583.sec = true;
         byte[] preUnmac = requestIsoMessage.getMacIso();
-        Debug.print(TAG + "PRE ISO BEFORE MAC: " + new String(preUnmac));
+        Debug.print(TAG + " PRE ISO BEFORE MAC: " + new String(preUnmac));
         byte[] unMac = new byte[preUnmac.length - 64];
         System.arraycopy(preUnmac, 0, unMac, 0, preUnmac.length - 64);
-        Debug.print(TAG + "ISO BEFORE MAC: " + new String(unMac));
+        Debug.print(TAG + " ISO BEFORE MAC: " + new String(unMac));
+        Debug.print(TAG + " CLEAR SESSION KEY USED: " + hostConfig.getKeyHolder().clearSessionKey());
+
         EncDec enc = new EncDec();
         String gotten = null;
         try {
-            System.out.println(TAG + "CLEAR SESSION KEY USED: " + hostConfig.getKeyHolder().clearSessionKey());
             gotten = enc.getMacNibss(hostConfig.getKeyHolder().clearSessionKey(), unMac);
             System.out.println(TAG + "MAC: " + gotten);
         } catch (Exception e) {
