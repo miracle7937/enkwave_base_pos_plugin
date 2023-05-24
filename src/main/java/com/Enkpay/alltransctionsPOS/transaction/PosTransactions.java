@@ -53,7 +53,7 @@ public class PosTransactions {
 
                 // fundwallet if successfull
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig );
-                new RetrofitBuilder().isFundUserWallet("").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
+                new RetrofitBuilder().isFundUserWallet("https://jsonplaceholder.typicode.com").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
                     @Override
                     public void onResponse(Call<FundWalletResponseData> call, Response<FundWalletResponseData> response) {
 
