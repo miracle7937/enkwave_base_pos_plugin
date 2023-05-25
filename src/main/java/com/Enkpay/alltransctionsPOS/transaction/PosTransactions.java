@@ -49,6 +49,7 @@ public class PosTransactions {
 
     public  void  processTransaction(SDKTransactionResult sdkTransactionResult){
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
+            System.out.println("MIMIMI The transaction is going");
 
             if( transactionResponse.responseCode=="00" && transactionResponse.responseCode=="11"){
 
@@ -75,6 +76,8 @@ public class PosTransactions {
                     }
                 });
             }else {
+                System.out.println("MIMIMI The transaction is going2222222222222");
+
                 sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
             }
@@ -97,7 +100,6 @@ public class PosTransactions {
         }
 
          TransactionResponse response=   new ProcessTransaction(hostConfig).process( cardData, requestData);
-
 
             transactionResult.onTransactionCompleted(response, requestData);
 
