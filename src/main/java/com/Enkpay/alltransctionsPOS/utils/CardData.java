@@ -15,6 +15,7 @@ public class CardData {
     public String expiryDate;
     public String acquiringInstitutionIdCode;
     public String CardName;
+    public String aid;
 
     public static String maskedPan(String cardNo)
     {
