@@ -77,6 +77,9 @@ public class PosTransactions {
                             //roll back
                         }
                     });
+                }else {
+                    sdkTransactionResult.onSuccess(transactionResponse, requestData);
+
                 }
 
                 // fundwallet if successfull
