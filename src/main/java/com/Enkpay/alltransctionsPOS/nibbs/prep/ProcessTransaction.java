@@ -22,8 +22,8 @@ public class ProcessTransaction {
     private static final String TAG = ProcessTransaction.class.getSimpleName();
     final HostConfig hostConfig;
 
-    public void process(CardData cardData, TransactionRequestData requestData, PosTransactions.TransactionResult transactionResult) {
-
+    public TransactionResponse process(CardData cardData, TransactionRequestData requestData) {
+        TransactionResponse transactionResponse;
         ISO8583 requestIsoMessage = setBaseFields(requestData, cardData, hostConfig.getConfigData());
 
         switch (requestData.getTransactionType()) {
@@ -125,7 +125,8 @@ public class ProcessTransaction {
 
         if (recvarr == null) {
             Debug.print("Receiver is null please refresh");
-            transactionResult.onError("Receiver is null please refresh");
+            transactionResponse =new  TransactionResponse().parseNibssMessage(sending, requestData.getTransactionType());
+
 
         } else {
 
@@ -143,11 +144,11 @@ public class ProcessTransaction {
             unpackISO8583.strtoiso(response);
             String[] receiving = new String[128];
             Utilities.logISOMsg(unpackISO8583, receiving);
+           transactionResponse =new  TransactionResponse().parseNibssMessage(receiving, requestData.getTransactionType());
+           requestData.setReversalData(receiving);
 
-            transactionResult.onSuccess(new TransactionResponse().parseNibssMessage(receiving, requestData.getTransactionType()));
         }
-
-
+        return  transactionResponse;
     }
 
 

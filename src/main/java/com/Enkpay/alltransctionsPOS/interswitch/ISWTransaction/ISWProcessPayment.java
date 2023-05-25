@@ -164,7 +164,7 @@ public class ISWProcessPayment {
                       );
                       //onSuccess response
                       System.out.println(new Gson().toJson(cashOutResponnse)+ "MIMI");
-                      transactionResult.onSuccess(transactionResponse);
+//                      transactionResult.onSuccess(transactionResponse);
                       // ...
                   }
               }
@@ -202,7 +202,7 @@ public class ISWProcessPayment {
                   );
                   System.out.println(new Gson().toJson(cashOutResponnse)+ "MIMI");
 
-                  transactionResult.onError(throwable.getLocalizedMessage());
+//                  transactionResult.onError(throwable.getLocalizedMessage());
               }
           });
 

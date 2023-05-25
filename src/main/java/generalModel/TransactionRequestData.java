@@ -2,6 +2,7 @@ package generalModel;
 
 import com.Enkpay.alltransctionsPOS.interswitch.models.AdditionalTransParams;
 import com.Enkpay.alltransctionsPOS.interswitch.models.IswParameters;
+import com.Enkpay.alltransctionsPOS.interswitch.models.MessageReasonCode;
 import com.Enkpay.alltransctionsPOS.interswitch.models.OriginalDataElements;
 import enums.IsoAccountType;
 import enums.TransactionType;
@@ -44,5 +45,23 @@ public class TransactionRequestData {
         this.refundAmount= refundAmount;
 
     }
+
+
+    public    void   setReversalData( String[] receiving ){
+        additionalTransParams.setTransmissionDateF7(receiving[7]);
+        additionalTransParams.setStanF11(receiving[11]);
+        additionalTransParams.setLocalTimeF12(receiving[12]);
+        additionalTransParams.setLocalDateF13(receiving[13]);
+        additionalTransParams.setPosConditionCodeF25(receiving[25]);
+        additionalTransParams.setPinCaptureModeF26(receiving[26]);
+        additionalTransParams.setAmountTransactionFeeF28(receiving[28]);
+        additionalTransParams.setRrnF37(receiving[37]);
+        additionalTransParams.setPosDataCodeF123(receiving[123]);
+
+    }
+
+
+
+
 }
 
