@@ -16,6 +16,7 @@ public class CardData {
     public String acquiringInstitutionIdCode;
     public String CardName;
     public String aid;
+    public boolean onlineCad;
 
     public static String maskedPan(String cardNo)
     {
