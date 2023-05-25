@@ -6,8 +6,10 @@ import com.Enkpay.alltransctionsPOS.utils.CardData;
 import enums.IsoAccountType;
 import enums.TransactionType;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class TransactionResponse {
     public TransactionType transactionType;
     public String maskedPan;
@@ -48,6 +50,7 @@ public class TransactionResponse {
     public PosMode source = PosMode.EPMS;
     public long interSwitchThreshold = 0L;
     public String errorMessage= null;
+    public boolean isSuccessful;
 
 
    public TransactionResponse parseNibssMessage(String[] receiving, TransactionType transactionType   ){
@@ -63,7 +66,7 @@ public class TransactionResponse {
     otherAmount = 0;
     transmissionDateTime = receiving[7];
     STAN = receiving[11];
-     cardExpiry = APPUtils.isEmpty(receiving[14]) ? receiving[14] : "";
+     cardExpiry = !APPUtils.isEmpty(receiving[14]) ? receiving[14] : "";
     RRN = receiving[37];
     localTime_12= receiving[12];
     localDate_13= receiving[13];
@@ -71,13 +74,14 @@ public class TransactionResponse {
     terminalId = receiving[41];
     merchantId = receiving[42];
     originalForwardingInstCode = APPUtils.isEmpty(receiving[33]) ? receiving[33] : "";
-    authCode =  APPUtils.isEmpty(receiving[38]) ? receiving[38] : "";
-    responseCode = APPUtils.isEmpty(receiving[39]) ? receiving[39] : "20";
-    additionalAmount_54 = APPUtils.isEmpty(receiving[54]) ? receiving[54] : "";
-    responseDE55 = APPUtils.isEmpty(receiving[55]) ? receiving[55] : "";
-    echoData = APPUtils.isEmpty(receiving[59]) ? receiving[59] : "";
+    authCode =  !APPUtils.isEmpty(receiving[38]) ? receiving[38] : "";
+    responseCode = !APPUtils.isEmpty(receiving[39]) ? receiving[39] : "20";
+    additionalAmount_54 = !APPUtils.isEmpty(receiving[54]) ? receiving[54] : "";
+    responseDE55 = !APPUtils.isEmpty(receiving[55]) ? receiving[55] : "";
+    echoData = !APPUtils.isEmpty(receiving[59]) ? receiving[59] : "";
      transmissionDate = receiving[13];
     transmissionTime = receiving[12];
+       isSuccessful = (receiving[39].equalsIgnoreCase("00") || receiving[39].equalsIgnoreCase("00"));
     return  this;
 
 }
