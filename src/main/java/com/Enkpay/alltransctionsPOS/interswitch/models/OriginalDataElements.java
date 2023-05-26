@@ -2,8 +2,10 @@ package com.Enkpay.alltransctionsPOS.interswitch.models;
 
 import enums.TransactionType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class OriginalDataElements {
     private TransactionType originalTransactionType;
     private long originalAmount;
@@ -16,6 +18,10 @@ public class OriginalDataElements {
     private MessageReasonCode reversalReasonCode;
     private String originalForwardingInstCode;
     private long originalInterSwitchThreshold;
+    private String transmissionDateF7 = "";
+    private String stanF11 ="";
+    private String localTimeF12="";
+    private String localDateF13="";
 
     public OriginalDataElements(TransactionType originalTransactionType, long originalAmount, String originalAuthorizationCode, String originalTransmissionDateTime,String originalTransmissionTime, String originalSTAN, String originalRRN, String originalAcquiringInstCode, MessageReasonCode reversalReasonCode, String originalForwardingInstCode, long originalInterSwitchThreshold) {
         this.originalTransactionType = originalTransactionType;

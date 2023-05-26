@@ -33,10 +33,10 @@ public class ProcessTransaction {
                 requestIsoMessage.setBit(11, field11, field11.length);
 
                 //not this when u running .substring(4)
-                byte[] field12 = requestData.getOriginalDataElements().getOriginalTransmissionTime().substring(4).getBytes();
+                byte[] field12 = requestData.getOriginalDataElements().getLocalTimeF12().getBytes();
                 requestIsoMessage.setBit(12, field12, field12.length);
 
-                byte[] field13 = requestData.getOriginalDataElements().getOriginalTransmissionTime().substring(0, 4).getBytes();
+                byte[] field13 = requestData.getOriginalDataElements().getLocalDateF13().getBytes();
                 requestIsoMessage.setBit(13, field13, field13.length);
 
                 byte[] field37 = requestData.getOriginalDataElements().getOriginalRRN().getBytes();
@@ -146,6 +146,7 @@ public class ProcessTransaction {
             Utilities.logISOMsg(unpackISO8583, receiving);
            transactionResponse =new  TransactionResponse().parseNibssMessage(receiving, requestData.getTransactionType());
            requestData.setReversalData(receiving);
+           requestData.setOriginalElement(receiving);
 
         }
         return  transactionResponse;
@@ -289,9 +290,7 @@ public class ProcessTransaction {
 
         byte[] field28 = "C00000000".getBytes(); // check too Amount, transaction fee Good
         packISO8583.setBit(28, field28, field28.length);
-//
-//        byte[] field30 = "C00000000".getBytes();
-//        packISO8583.setBit(30, field30, field30.length);
+
 
 
         byte[] field32 = cardData.getTrack2Data().substring(0, 6).getBytes(); //track2Data.substring(0, 6); that the answer  // check too Acquiring institution id code

@@ -61,6 +61,18 @@ public class TransactionRequestData {
     }
 
 
+    public    void   setOriginalElement( String[] receiving ){
+        originalDataElements = new OriginalDataElements();
+        originalDataElements.setTransmissionDateF7(receiving[7]);
+        originalDataElements.setOriginalSTAN(receiving[11]);
+        originalDataElements.setLocalTimeF12(receiving[12]);
+        originalDataElements.setLocalDateF13(receiving[13]);
+        originalDataElements.setOriginalRRN(receiving[37]);
+        originalDataElements.setOriginalAuthorizationCode(receiving[38]);
+
+    }
+
+
 
 
 }
