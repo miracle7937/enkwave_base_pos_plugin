@@ -21,14 +21,20 @@ import retrofit2.Response;
 import services.KeyValuePairStorage;
 
 public class PosTransactions {
-    final HostConfig hostConfig;
-    final CardData cardData;
-    final  TransactionRequestData requestData;
+     HostConfig hostConfig;
+   CardData cardData;
+    TransactionRequestData requestData;
+
+
 
     public PosTransactions(HostConfig hostConfig, CardData cardData, TransactionRequestData requestData) {
         this.hostConfig = hostConfig;
         this.cardData = cardData;
         this.requestData = requestData;
+    }
+
+    public PosTransactions(HostConfig hostConfig){
+        this.hostConfig= hostConfig;
     }
 
     public  void  init(IntResult intResult){
