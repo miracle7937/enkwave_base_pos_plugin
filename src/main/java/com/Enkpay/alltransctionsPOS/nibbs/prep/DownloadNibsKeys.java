@@ -12,20 +12,20 @@ import services.KeyValuePairStorage;
 public class DownloadNibsKeys {
     NibsKeyRequest nibsKeyRequest = new  NibsKeyRequest();
 
-    public void download(PosTransactions.IntResult intResult) {
+    public void download(PosTransactions.IntResult intResult, String terminalID) {
         KeyHolder keyHolder = new KeyHolder();
         try {
       String encryptedMasterKey =  nibsKeyRequest.get(
               KeyType.MASTER,
-              "8767B834"
+              terminalID
       ).substring(0, 32);
       String encryptedSessionKey =  nibsKeyRequest.get(
               KeyType.SESSION,
-              "8767B834"
+              terminalID
       ).substring(0, 32);
       String encryptedPinKey =  nibsKeyRequest.get(
               KeyType.PIN,
-              "8767B834"
+              terminalID
       ).substring(0, 32);
 
       Debug.print("encryptedMasterKey " + encryptedMasterKey);
@@ -39,7 +39,9 @@ public class DownloadNibsKeys {
             Debug.print("nibssClearMasterKey " + keyHolder.nibssClearMasterKey());
             Debug.print("clearSessionKey " +  keyHolder.clearSessionKey());
             Debug.print("clearPinKey " + keyHolder.clearPinKey());
-      ConfigData configData= new ParametersDownload2().download(
+
+//            new ClearMasterKeyFromExpressPayment().request("11111111111111111111111111111111");
+            ConfigData configData= new ParametersDownload2().download(
               "8767B834",
               keyHolder.clearSessionKey()
       );

@@ -1,6 +1,7 @@
 package com.Enkpay.alltransctionsPOS;
 
 import Var.Constants;
+import com.Enkpay.alltransctionsPOS.nibbs.prep.ClearMasterKeyFromExpressPayment;
 import com.Enkpay.alltransctionsPOS.nibbs.prep.DownloadNibsKeys;
 import com.Enkpay.alltransctionsPOS.nibbs.prep.ParametersDownload;
 import enums.IsoAccountType;
@@ -16,7 +17,9 @@ public class AlltransctionPosApplication {
 //		SpringApplication.run(AlltransctionPosApplication.class, args);
 
 		try {
-		 new DownloadNibsKeys().download(null);
+
+			new ClearMasterKeyFromExpressPayment().request("11111111111111111111111111111111");
+//		 new DownloadNibsKeys().download(null);
 //			new ParametersDownload().download(
 //					TransactionType.TERMINAL_PARAMETER_DOWNLOAD,
 //					"8767B834",

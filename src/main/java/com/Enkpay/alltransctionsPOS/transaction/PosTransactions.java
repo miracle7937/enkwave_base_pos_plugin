@@ -31,16 +31,16 @@ public class PosTransactions {
         this.requestData = requestData;
     }
 
-    public static void  init(IntResult intResult){
+    public  void  init(IntResult intResult){
         if(true){
             boolean keyPassedTime=   DateUtils.hourPassed(7, KeyValuePairStorage.getInstance().getLong(Constants.LAST_POS_CONFIGURATION_TIME));
             if(keyPassedTime){
-                new DownloadNibsKeys().download(intResult);
+                new DownloadNibsKeys().download(intResult, hostConfig.getTerminalId());
             }else {
                 Debug.print("You cant get key because your current key haven't expired");
             }
         }else{
-        new ISWInit().setUpIswToken("","", intResult);
+        new ISWInit().setUpIswToken("", hostConfig.getTerminalId(), intResult);
         }
 
     }
@@ -51,13 +51,13 @@ public class PosTransactions {
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
             System.out.println("MIMIMI The transaction is going");
 
-            if( transactionResponse.responseCode=="00" && transactionResponse.responseCode=="11"){
+            if( transactionResponse.responseCode !="00" || transactionResponse.responseCode=="11"){
 
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig );
                 new RetrofitBuilder().isFundUserWallet("https://jsonplaceholder.typicode.com").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
                     @Override
                     public void onResponse(Call<FundWalletResponseData> call, Response<FundWalletResponseData> response) {
-                        if((response.code() != 200 || response.code() != 201) &&( transactionResponse.responseCode=="00" || transactionResponse.responseCode=="10") ){
+                        if((response.code() == 200 || response.code() != 201) &&( transactionResponse.responseCode !="00" || transactionResponse.responseCode=="10") ){
 
                             TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
 
@@ -96,7 +96,7 @@ public class PosTransactions {
         boolean keyPassedTime=   DateUtils.hourPassed(7, KeyValuePairStorage.getInstance().getLong(Constants.LAST_POS_CONFIGURATION_TIME));
         if(keyPassedTime){
             //fetch new keys
-            new DownloadNibsKeys().download(null);
+            new DownloadNibsKeys().download(null,  hostConfig.getTerminalId());
         }
 
          TransactionResponse response=   new ProcessTransaction(hostConfig).process( cardData, requestData);
