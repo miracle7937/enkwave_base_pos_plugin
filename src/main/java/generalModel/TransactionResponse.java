@@ -81,7 +81,7 @@ public class TransactionResponse {
     echoData = !APPUtils.isEmpty(receiving[59]) ? receiving[59] : "";
      transmissionDate = receiving[13];
     transmissionTime = receiving[12];
-       isSuccessful = (receiving[39].equalsIgnoreCase("00") || receiving[39].equalsIgnoreCase("00"));
+       isSuccessful =  !APPUtils.isEmpty(receiving[39]) ? (receiving[39].equalsIgnoreCase("00") || receiving[39].equalsIgnoreCase("00")): false;
     return  this;
 
 }
