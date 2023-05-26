@@ -275,8 +275,8 @@ public class ProcessTransaction {
         byte[] field22 = "051".getBytes(); // check too POS entry mode
         packISO8583.setBit(22, field22, field22.length);
 
-        if (cardData.getPanSequenceNumber().length() == 3) {
-            byte[] field23 = cardData.getPanSequenceNumber().getBytes(); // check too Card sequence number eg master card number, visa number
+        if (!cardData.getPanSequenceNumber().isEmpty()) {
+            byte[] field23 = Utilities.padLeftZeros(cardData.getPanSequenceNumber(), 3).getBytes(); // check too Card sequence number eg master card number, visa number
             packISO8583.setBit(23, field23, field23.length);
         }
 
