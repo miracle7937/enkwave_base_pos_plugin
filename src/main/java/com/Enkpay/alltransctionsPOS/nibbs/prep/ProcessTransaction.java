@@ -43,8 +43,12 @@ public class ProcessTransaction {
                 byte[] field37 = requestData.getOriginalDataElements().getOriginalRRN().getBytes();
                 requestIsoMessage.setBit(37, field37, field37.length);
 
-                byte[] field38 = requestData.getOriginalDataElements().getOriginalAuthorizationCode().getBytes();
+                if(requestData.getOriginalDataElements().getOriginalAuthorizationCode() != null){
+                                    byte[] field38 = requestData.getOriginalDataElements().getOriginalAuthorizationCode().getBytes();
                 requestIsoMessage.setBit(38, field38, field38.length);
+                }
+
+
 
                 //reason code
                 byte[] field56 = "4021".getBytes();

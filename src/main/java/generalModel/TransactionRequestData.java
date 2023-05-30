@@ -67,6 +67,7 @@ public class TransactionRequestData {
         originalDataElements.setOriginalTransmissionDateTime(receiving[7]);
         originalDataElements.setOriginalSTAN(receiving[11]);
         originalDataElements.setLocalTimeF12(receiving[12]);
+        originalDataElements.setOriginalTransmissionTime(receiving[12]);
         originalDataElements.setLocalDateF13(receiving[13]);
         originalDataElements.setOriginalAcquiringInstCode(receiving[32]);
         originalDataElements.setOriginalForwardingInstCode(receiving[33]);
