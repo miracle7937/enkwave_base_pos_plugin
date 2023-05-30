@@ -67,8 +67,8 @@ public class PosTransactions {
                 new RetrofitBuilder().isFundUserWallet("https://jsonplaceholder.typicode.com").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
                     @Override
                     public void onResponse(Call<FundWalletResponseData> call, Response<FundWalletResponseData> response) {
-                        //if rrn in null it means transaction can't be reversed
-                        if(requestData.getOriginalDataElements().getOriginalRRN() != null){
+
+                        if(requestData.getOriginalDataElements() != null){
                             TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
 
                             sdkTransactionResult.onSuccess(transactionResponse, requestData);

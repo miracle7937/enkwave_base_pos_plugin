@@ -62,18 +62,20 @@ public class TransactionRequestData {
 
 
     public    void   setOriginalElement( String[] receiving ){
-        originalDataElements = new OriginalDataElements();
-        originalDataElements.setTransmissionDateF7(receiving[7]);
-        originalDataElements.setOriginalTransmissionDateTime(receiving[7]);
-        originalDataElements.setOriginalSTAN(receiving[11]);
-        originalDataElements.setLocalTimeF12(receiving[12]);
-        originalDataElements.setOriginalTransmissionTime(receiving[12]);
-        originalDataElements.setLocalDateF13(receiving[13]);
-        originalDataElements.setOriginalAcquiringInstCode(receiving[32]);
-        originalDataElements.setOriginalForwardingInstCode(receiving[33]);
-        originalDataElements.setOriginalRRN(receiving[37]);
-        originalDataElements.setOriginalAuthorizationCode(receiving[38]);
 
+       if(receiving == null || receiving.length == 0) {
+           originalDataElements = new OriginalDataElements();
+           originalDataElements.setTransmissionDateF7(receiving[7]);
+           originalDataElements.setOriginalTransmissionDateTime(receiving[7]);
+           originalDataElements.setOriginalSTAN(receiving[11]);
+           originalDataElements.setLocalTimeF12(receiving[12]);
+           originalDataElements.setOriginalTransmissionTime(receiving[12]);
+           originalDataElements.setLocalDateF13(receiving[13]);
+           originalDataElements.setOriginalAcquiringInstCode(receiving[32]);
+           originalDataElements.setOriginalForwardingInstCode(receiving[33]);
+           originalDataElements.setOriginalRRN(receiving[37]);
+           originalDataElements.setOriginalAuthorizationCode(receiving[38]);
+       }
     }
 
 
