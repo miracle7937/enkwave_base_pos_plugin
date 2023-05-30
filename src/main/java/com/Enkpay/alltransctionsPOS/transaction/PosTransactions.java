@@ -36,8 +36,9 @@ public class PosTransactions {
         this.preferenceBase = preferenceBase;
     }
 
-    public PosTransactions(HostConfig hostConfig ){
+    public PosTransactions(HostConfig hostConfig, PreferenceBase preferenceBase ){
         this.hostConfig= hostConfig;
+        this.preferenceBase = preferenceBase;
     }
 
     public  void  init(IntResult intResult){
