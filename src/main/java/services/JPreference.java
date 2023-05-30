@@ -5,7 +5,7 @@ import java.util.prefs.Preferences;
 public class JPreference implements PreferenceBase {
     Preferences prefs;
 
-    JPreference(){
+    public JPreference(){
         this.prefs = Preferences.userNodeForPackage(KeyValuePairStorage.class);
     }
     @Override
