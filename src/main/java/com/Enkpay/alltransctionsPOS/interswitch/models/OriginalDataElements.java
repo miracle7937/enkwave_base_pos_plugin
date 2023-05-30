@@ -3,9 +3,11 @@ package com.Enkpay.alltransctionsPOS.interswitch.models;
 import enums.TransactionType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
+@ToString
 public class OriginalDataElements {
     private TransactionType originalTransactionType;
     private long originalAmount;

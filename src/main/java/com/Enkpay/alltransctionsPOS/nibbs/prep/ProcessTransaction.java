@@ -29,6 +29,8 @@ public class ProcessTransaction {
         switch (requestData.getTransactionType()) {
             case REVERSAL: {
 
+                Debug.print("Original==============> "+ requestData.getOriginalDataElements().toString());
+
                 byte[] field11 = requestData.getOriginalDataElements().getOriginalSTAN().getBytes();
                 requestIsoMessage.setBit(11, field11, field11.length);
 
