@@ -7,10 +7,18 @@ import com.Enkpay.alltransctionsPOS.nibbs.miscellaneous.ConfigData;
 import com.Enkpay.alltransctionsPOS.transaction.PosTransactions;
 import com.google.gson.Gson;
 import generalModel.KeyHolder;
+import lombok.AllArgsConstructor;
 import services.KeyValuePairStorage;
+import services.PreferenceBase;
+
+
 
 public class DownloadNibsKeys {
     NibsKeyRequest nibsKeyRequest = new  NibsKeyRequest();
+    final PreferenceBase preferenceBase;
+    public DownloadNibsKeys(PreferenceBase preferenceBase){
+        this.preferenceBase = preferenceBase;
+        }
 
     public void download(PosTransactions.IntResult intResult, String terminalID) {
         KeyHolder keyHolder = new KeyHolder();
@@ -50,7 +58,7 @@ public class DownloadNibsKeys {
               keyHolder.clearSessionKey()
       );
 
-      KeyValuePairStorage loadedStorage =  KeyValuePairStorage.getInstance();
+      KeyValuePairStorage loadedStorage =  new KeyValuePairStorage(preferenceBase);
       loadedStorage.put(Constants.PREF_KEYHOLDER, new Gson().toJson(keyHolder));
       loadedStorage.put(Constants.PREF_CONFIG_DATA, new Gson().toJson(configData));
       loadedStorage.putLong(Constants.LAST_POS_CONFIGURATION_TIME, System.currentTimeMillis());

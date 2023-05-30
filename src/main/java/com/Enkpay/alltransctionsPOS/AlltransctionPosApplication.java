@@ -7,6 +7,7 @@ import com.Enkpay.alltransctionsPOS.nibbs.prep.ParametersDownload;
 import enums.IsoAccountType;
 import enums.TransactionType;
 import generalModel.KeyHolder;
+import services.JPreference;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,14 +20,14 @@ public class AlltransctionPosApplication {
 		try {
 
 			new ClearMasterKeyFromExpressPayment().request("11111111111111111111111111111111");
-//		 new DownloadNibsKeys().download(null);
+		 new DownloadNibsKeys(new JPreference()).download(null, "8767B834");
 //			new ParametersDownload().download(
 //					TransactionType.TERMINAL_PARAMETER_DOWNLOAD,
 //					"8767B834",
 //					keyHolder.clearSessionKey(),
 //					Constants.RESPONSE_CODE_39,
 //					IsoAccountType.DEFAULT_UNSPECIFIED
-
+//
 //);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

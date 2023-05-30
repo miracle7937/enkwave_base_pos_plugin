@@ -19,34 +19,37 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import services.KeyValuePairStorage;
+import services.PreferenceBase;
 
 public class PosTransactions {
      HostConfig hostConfig;
    CardData cardData;
     TransactionRequestData requestData;
+    PreferenceBase preferenceBase;
 
 
 
-    public PosTransactions(HostConfig hostConfig, CardData cardData, TransactionRequestData requestData) {
+    public PosTransactions(HostConfig hostConfig, CardData cardData, TransactionRequestData requestData,  PreferenceBase preferenceBase) {
         this.hostConfig = hostConfig;
         this.cardData = cardData;
         this.requestData = requestData;
+        this.preferenceBase = preferenceBase;
     }
 
-    public PosTransactions(HostConfig hostConfig){
+    public PosTransactions(HostConfig hostConfig ){
         this.hostConfig= hostConfig;
     }
 
     public  void  init(IntResult intResult){
         if(true){
-            boolean keyPassedTime=   DateUtils.hourPassed(7, KeyValuePairStorage.getInstance().getLong(Constants.LAST_POS_CONFIGURATION_TIME));
+            boolean keyPassedTime=   DateUtils.hourPassed(7, preferenceBase.getLongData(Constants.LAST_POS_CONFIGURATION_TIME));
             if(keyPassedTime){
-                new DownloadNibsKeys().download(intResult, hostConfig.getTerminalId());
+                new DownloadNibsKeys(this.preferenceBase).download(intResult, hostConfig.getTerminalId());
             }else {
                 Debug.print("You cant get key because your current key haven't expired");
             }
         }else{
-        new ISWInit().setUpIswToken("", hostConfig.getTerminalId(), intResult);
+        new ISWInit(preferenceBase).setUpIswToken("", hostConfig.getTerminalId(), intResult);
         }
 
     }
@@ -102,10 +105,10 @@ public class PosTransactions {
     public void  selectTransaction( HostConfig hostConfig, CardData cardData, TransactionRequestData requestData ,TransactionResult transactionResult){
 
         if(true){
-        boolean keyPassedTime=   DateUtils.hourPassed(7, KeyValuePairStorage.getInstance().getLong(Constants.LAST_POS_CONFIGURATION_TIME));
+        boolean keyPassedTime=   DateUtils.hourPassed(7, preferenceBase.getLongData(Constants.LAST_POS_CONFIGURATION_TIME));
         if(keyPassedTime){
             //fetch new keys
-            new DownloadNibsKeys().download(null,  hostConfig.getTerminalId());
+            new DownloadNibsKeys(preferenceBase).download(null,  hostConfig.getTerminalId());
         }
 
          TransactionResponse response=   new ProcessTransaction(hostConfig).process( cardData, requestData);

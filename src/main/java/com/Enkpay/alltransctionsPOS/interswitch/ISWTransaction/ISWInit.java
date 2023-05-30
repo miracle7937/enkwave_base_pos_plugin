@@ -5,12 +5,16 @@ import com.Enkpay.alltransctionsPOS.implementation.RetrofitBuilder;
 import com.Enkpay.alltransctionsPOS.interswitch.models.TokenPassportRequest;
 import com.Enkpay.alltransctionsPOS.interswitch.models.TokenPassportResponse;
 import com.Enkpay.alltransctionsPOS.transaction.PosTransactions;
+import lombok.AllArgsConstructor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import services.KeyValuePairStorage;
+import services.PreferenceBase;
 
+@AllArgsConstructor
 public class ISWInit {
+    final PreferenceBase preferenceBase;
     public  void  setUpIswToken(String mid, String terminalID, final PosTransactions.IntResult onISWTokenComplete){
         TokenPassportRequest tokenPassportRequest     = new TokenPassportRequest(mid, terminalID);
 
@@ -20,7 +24,7 @@ public class ISWInit {
 
 
                 if(response.body() != null){
-                    KeyValuePairStorage.getInstance().put(Constants.TOKEN_RESPONSE_TAG,response.body().getToken());
+                   new  KeyValuePairStorage(preferenceBase).put(Constants.TOKEN_RESPONSE_TAG,response.body().getToken());
                 }
 
             }
