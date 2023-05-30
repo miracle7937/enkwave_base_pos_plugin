@@ -80,6 +80,7 @@ public class PosTransactions {
 //                        }
                         }else{
                             //refresh key
+                            new DownloadNibsKeys(PosTransactions.this.preferenceBase).download(null, hostConfig.getTerminalId());
                             sdkTransactionResult.onSuccess(transactionResponse, requestData);
                         }
 
