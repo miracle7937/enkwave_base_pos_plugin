@@ -18,7 +18,8 @@ public class KeyValuePairStorage {
 
     public KeyValuePairStorage() {
 
-        this.prefs = Preferences.systemNodeForPackage(KeyValuePairStorage.class);
+
+        this.prefs = Preferences.systemRoot();
     }
 
     public void put(String key, String value) {

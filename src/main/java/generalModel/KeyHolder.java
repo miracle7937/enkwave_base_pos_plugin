@@ -15,6 +15,7 @@ import static com.Enkpay.alltransctionsPOS.nibbs.services.Decrypter.*;
 public class KeyHolder {
     public int id = 1;
     public String masterKey;
+    private String clearMasterKey;
     public String sessionKey;
     public String pinKey;
     public String track2Key;
@@ -27,13 +28,15 @@ public class KeyHolder {
 
     }
 
-
+public  void  setClearPinKey(String value){
+    clearMasterKey= value;
+}
     public boolean isValid() {
         return clearPinKey() != null && pinKey != null && masterKey != null;
     }
 
     public String nibssClearMasterKey() {
-        return threeDesDecryptA(NibsUtilityData.compKey1, NibsUtilityData.compKey2,masterKey );
+        return   clearMasterKey!= null? clearMasterKey  :  threeDesDecryptA(NibsUtilityData.compKey1, NibsUtilityData.compKey2,masterKey );
     }
 
     public String clearSessionKey() {

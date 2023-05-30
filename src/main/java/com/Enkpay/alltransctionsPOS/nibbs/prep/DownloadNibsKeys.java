@@ -28,7 +28,11 @@ public class DownloadNibsKeys {
               terminalID
       ).substring(0, 32);
 
-      Debug.print("encryptedMasterKey " + encryptedMasterKey);
+//      String clearPinKeyFromExpressPayment=     new ClearMasterKeyFromExpressPayment().request(encryptedMasterKey);
+//      keyHolder.setClearMasterKey(clearPinKeyFromExpressPayment);
+
+
+            Debug.print("encryptedMasterKey " + encryptedMasterKey);
             Debug.print("encryptedSessionKey " + encryptedSessionKey);
             Debug.print("encryptedPinKey " + encryptedPinKey);
 
@@ -42,7 +46,7 @@ public class DownloadNibsKeys {
 
 //            new ClearMasterKeyFromExpressPayment().request("11111111111111111111111111111111");
             ConfigData configData= new ParametersDownload2().download(
-              "8767B834",
+                    terminalID,
               keyHolder.clearSessionKey()
       );
 

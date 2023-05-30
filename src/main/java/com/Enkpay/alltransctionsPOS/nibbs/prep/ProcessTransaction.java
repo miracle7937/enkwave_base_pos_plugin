@@ -276,7 +276,7 @@ public class ProcessTransaction {
         packISO8583.setBit(22, field22, field22.length);
 
 
-            byte[] field23 = cardData.getPanSequenceNumber().getBytes(); // check too Card sequence number eg master card number, visa number
+            byte[] field23 = Utilities.padLeft(cardData.getPanSequenceNumber() ,3, '0').getBytes();; // check too Card sequence number eg master card number, visa number
             packISO8583.setBit(23, field23, field23.length);
 
 
