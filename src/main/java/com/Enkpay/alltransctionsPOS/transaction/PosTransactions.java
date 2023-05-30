@@ -66,13 +66,13 @@ public class PosTransactions {
                         TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
 
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
-                        if((response.code() == 200 || response.code() == 201) &&( transactionResponse.responseCode =="00" || transactionResponse.responseCode=="10") ){
-
-//                            TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
-
-                            sdkTransactionResult.onSuccess(transactionResponse, requestData);
-
-                        }
+//                        if((response.code() == 200 || response.code() == 201) &&( transactionResponse.responseCode =="00" || transactionResponse.responseCode=="10") ){
+//
+////                            TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
+//
+//                            sdkTransactionResult.onSuccess(transactionResponse, requestData);
+//
+//                        }
 
                     }
 
