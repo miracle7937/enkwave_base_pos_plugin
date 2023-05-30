@@ -47,7 +47,7 @@ public class ProcessTransaction {
                 //reason code
                 byte[] field56 = "4021".getBytes();
                 requestIsoMessage.setBit(56, field56, field56.length);
-                setOriginalTransactionData(requestIsoMessage, requestData);
+                setOriginalTransactionData(requestIsoMessage, requestData, cardData);
 
             }
             case PURCHASE: {
@@ -154,13 +154,15 @@ public class ProcessTransaction {
 
 
 
-    private void setOriginalTransactionData(ISO8583 requestIsoMessage, TransactionRequestData requestData) {
+    private void setOriginalTransactionData(ISO8583 requestIsoMessage, TransactionRequestData requestData, CardData cardData) {
         if (requestData.getOriginalDataElements() != null) {
+            String acqCode2 = cardData.getTrack2Data().substring(0, 6).toUpperCase();
+
 
             String originalElement = "0200" +
                     requestData.getOriginalDataElements().getOriginalSTAN()
                     + requestData.getOriginalDataElements().getOriginalTransmissionDateTime()
-                    + Utilities.padLeftZeros(requestData.getOriginalDataElements().getOriginalAcquiringInstCode(), 11)
+                    + Utilities.padLeftZeros(acqCode2, 11)
                     + Utilities.padLeftZeros(requestData.getOriginalDataElements().getOriginalForwardingInstCode(), 11);
 
 
