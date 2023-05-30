@@ -32,7 +32,6 @@ public class ProcessTransaction {
                 byte[] field11 = requestData.getOriginalDataElements().getOriginalSTAN().getBytes();
                 requestIsoMessage.setBit(11, field11, field11.length);
 
-                //not this when u running .substring(4)
                 byte[] field12 = requestData.getOriginalDataElements().getLocalTimeF12().getBytes();
                 requestIsoMessage.setBit(12, field12, field12.length);
 
@@ -61,7 +60,6 @@ public class ProcessTransaction {
 
         byte[] field123 = "510101511344101".getBytes();
         requestIsoMessage.setBit(123, field123, field123.length);
-
         byte use = 0x0;
         char ch = (char) use;
         byte[] field128 = Character.toString(ch).getBytes();
@@ -288,7 +286,7 @@ public class ProcessTransaction {
         packISO8583.setBit(26, field26, field26.length);
 
 
-        byte[] field28 = "C00000000".getBytes(); // check too Amount, transaction fee Good
+        byte[] field28 = "D00000000".getBytes(); // check too Amount, transaction fee Good
         packISO8583.setBit(28, field28, field28.length);
 
 
