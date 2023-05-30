@@ -67,7 +67,7 @@ public class PosTransactions {
                 new RetrofitBuilder().isFundUserWallet("https://jsonplaceholder.typicode.com").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
                     @Override
                     public void onResponse(Call<FundWalletResponseData> call, Response<FundWalletResponseData> response) {
-
+                        System.out.println("------------------------- ABABBABABA"+ requestData.getOriginalDataElements() );
                         if(requestData.getOriginalDataElements() != null){
                             TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
 
