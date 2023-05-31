@@ -63,7 +63,7 @@ public class PosTransactions {
 
             if( transactionResponse.responseCode !="00" || transactionResponse.responseCode=="11"){
 
-                FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig );
+                FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
                 Debug.print(fundWalletRequestData.toString()+ "Pushed response >>>>>>>>>>>>>>>>>>");
                 try {
                     Response<FundWalletResponseData>     fundCustomerWallet =    new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
