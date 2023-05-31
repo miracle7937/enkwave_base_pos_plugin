@@ -16,6 +16,7 @@ public class RetrofitBuilder {
     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
     final String Express_Payment= "http://80.88.8.56:552/";
+    final String EPCashOutPoint= "http://testpos.enkpay.com/api/v1/cash-out-webhook";
     final String live = "https://kimono.interswitchng.com/kmw/kimonoservice/";
 final String test = "https://qa.interswitchng.com/kmw/kimonoservice/";
 final String KSN_TEST = "";
@@ -66,14 +67,14 @@ final String IPEK_LIVE = "";
             .build().create(IswService.class);
     }
 
-    public  FundWalletService isFundUserWallet(String baseUrl){
+    public  FundWalletService isFundUserWallet(){
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
 
        return new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(EPCashOutPoint)
                 .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(FundWalletService.class);

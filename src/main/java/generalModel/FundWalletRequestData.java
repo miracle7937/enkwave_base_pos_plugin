@@ -3,7 +3,9 @@ package generalModel;
 import com.Enkpay.alltransctionsPOS.nibbs.model.HostConfig;
 import com.Enkpay.alltransctionsPOS.utils.CardData;
 import enums.TransactionType;
+import lombok.ToString;
 
+@ToString
 public class FundWalletRequestData {
     String terminalID;
     Long amount;

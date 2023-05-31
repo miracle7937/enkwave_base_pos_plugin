@@ -64,14 +64,18 @@ public class PosTransactions {
             if( transactionResponse.responseCode !="00" || transactionResponse.responseCode=="11"){
 
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig );
-                new RetrofitBuilder().isFundUserWallet("https://jsonplaceholder.typicode.com").fundCustomerWallet(fundWalletRequestData).enqueue(new Callback<FundWalletResponseData>() {
-                    @Override
-                    public void onResponse(Call<FundWalletResponseData> call, Response<FundWalletResponseData> response) {
-                        System.out.println("------------------------- ABABBABABA"+ requestData.getOriginalDataElements() );
-                        if(requestData.getOriginalDataElements() != null){
-                            TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
+                Debug.print(fundWalletRequestData.toString()+ "Pushed response >>>>>>>>>>>>>>>>>>");
+                try {
+                    Response<FundWalletResponseData>     fundCustomerWallet =    new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
 
-                            sdkTransactionResult.onSuccess(transactionResponse, requestData);
+                    if (fundCustomerWallet.isSuccessful()) {
+
+
+
+                        if(requestData.getOriginalDataElements() != null){
+                            TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);
+
+                            sdkTransactionResult.onSuccess(rollBackTransactionResponse, requestData);
 //                        if((response.code() == 200 || response.code() == 201) &&( transactionResponse.responseCode =="00" || transactionResponse.responseCode=="10") ){
 //
 ////                            TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
@@ -86,19 +90,20 @@ public class PosTransactions {
                         }
 
 
+
+
+
+                    } else {
+
+
                     }
 
-                    @Override
-                    public void onFailure(Call<FundWalletResponseData> call, Throwable throwable) {
+                }catch (Exception e){
 
-                        sdkTransactionResult.onError(throwable.getMessage(), requestData);
+                }
 
-                        //roll back
-                    }
-                });
             }else {
-                System.out.println("MIMIMI The transaction is going2222222222222");
-
+                new DownloadNibsKeys(PosTransactions.this.preferenceBase).download(null, hostConfig.getTerminalId());
                 sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
             }
