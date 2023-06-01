@@ -7,6 +7,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface FundWalletService {
-    @POST("/cash-out-webhook")
+    @POST("/pos")
     Call<FundWalletResponseData> fundCustomerWallet(@Body FundWalletRequestData user);
 }

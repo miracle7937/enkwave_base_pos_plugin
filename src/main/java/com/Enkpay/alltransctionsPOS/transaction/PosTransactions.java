@@ -61,15 +61,16 @@ public class PosTransactions {
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
             System.out.println("MIMIMI The transaction is going");
 
-            if( transactionResponse.responseCode !="00" || transactionResponse.responseCode=="11"){
-
+            if( transactionResponse.responseCode != null){
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
-                Debug.print(fundWalletRequestData.toString()+ "Pushed response >>>>>>>>>>>>>>>>>>");
                 try {
-                    Response<FundWalletResponseData>     fundCustomerWallet =    new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
+                    Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
 
-                    if (fundCustomerWallet.isSuccessful()) {
+                    if (fundCustomerWallet.body().status == true && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")) {
 
+                        sdkTransactionResult.onSuccess(transactionResponse, requestData);
+
+                    } else {
 
 
                         if(requestData.getOriginalDataElements() != null){
@@ -92,19 +93,15 @@ public class PosTransactions {
 
 
 
-
-                    } else {
-
-
                     }
 
                 }catch (Exception e){
-
+                    sdkTransactionResult.onError(e.getLocalizedMessage(), requestData);
                 }
 
             }else {
                 new DownloadNibsKeys(PosTransactions.this.preferenceBase).download(null, hostConfig.getTerminalId());
-                sdkTransactionResult.onSuccess(transactionResponse, requestData);
+                sdkTransactionResult.onError("Refresh new key", requestData);
 
             }
 
