@@ -16,7 +16,7 @@ public class RetrofitBuilder {
     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
     final String Express_Payment= "http://80.88.8.56:552/";
-    final String EPCashOutPoint= "https://testpos.enkpay.com/api";
+    final String EPCashOutPoint= "https://testpos.enkpay.com/api/";
     final String live = "https://kimono.interswitchng.com/kmw/kimonoservice/";
 final String test = "https://qa.interswitchng.com/kmw/kimonoservice/";
 final String KSN_TEST = "";
