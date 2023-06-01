@@ -294,7 +294,7 @@ public class ProcessTransaction {
         packISO8583.setBit(26, field26, field26.length);
 
 
-        byte[] field28 = "D00000000".getBytes(); // check too Amount, transaction fee Good
+        byte[] field28 = "C00000000".getBytes(); // check too Amount, transaction fee Good
         packISO8583.setBit(28, field28, field28.length);
 
 
