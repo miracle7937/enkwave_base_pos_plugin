@@ -1,5 +1,6 @@
 package generalModel;
 
+import Var.Constants;
 import Var.PosMode;
 import com.Enkpay.alltransctionsPOS.utils.APPUtils;
 import com.Enkpay.alltransctionsPOS.utils.CardData;
@@ -78,7 +79,7 @@ public class TransactionResponse {
     responseCode = !APPUtils.isEmpty(receiving[39]) ? receiving[39] : "20";
     additionalAmount_54 = !APPUtils.isEmpty(receiving[54]) ? receiving[54] : "";
     responseDE55 = !APPUtils.isEmpty(receiving[55]) ? receiving[55] : "";
-    echoData = !APPUtils.isEmpty(receiving[59]) ? receiving[59] : "";
+    echoData = !APPUtils.isEmpty(receiving[59]) ? Constants.getResponseMessageFromCode(responseCode) : "";
      transmissionDate = receiving[13];
     transmissionTime = receiving[12];
        isSuccessful =  !APPUtils.isEmpty(receiving[39]) ? (receiving[39].equalsIgnoreCase("00") || receiving[39].equalsIgnoreCase("00")): false;

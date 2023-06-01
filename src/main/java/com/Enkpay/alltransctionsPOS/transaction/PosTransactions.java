@@ -59,8 +59,6 @@ public class PosTransactions {
 
     public  void  processTransaction(SDKTransactionResult sdkTransactionResult){
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
-            System.out.println("MIMIMI The transaction is going");
-
             if( transactionResponse.responseCode != null){
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
                 try {
@@ -85,8 +83,6 @@ public class PosTransactions {
 //
 //                        }
                         }else{
-                            //refresh key
-                            new DownloadNibsKeys(PosTransactions.this.preferenceBase).download(null, hostConfig.getTerminalId());
                             sdkTransactionResult.onSuccess(transactionResponse, requestData);
                         }
 
@@ -118,6 +114,8 @@ public class PosTransactions {
         if(true){
         boolean keyPassedTime=   DateUtils.hourPassed(7, preferenceBase.getLongData(Constants.LAST_POS_CONFIGURATION_TIME));
         if(keyPassedTime){
+            Debug.print("Key =======================> expired");
+
             //fetch new keys
             new DownloadNibsKeys(preferenceBase).download(null,  hostConfig.getTerminalId());
         }
