@@ -129,7 +129,7 @@ public class ProcessTransaction {
 
         if (recvarr == null) {
             Debug.print("Receiver is null please refresh");
-            transactionResponse =new  TransactionResponse().parseNibssMessage(sending, requestData.getTransactionType());
+            transactionResponse =new  TransactionResponse().parseNibssMessage(sending, requestData.getTransactionType(), true);
 
 
         } else {
@@ -148,7 +148,7 @@ public class ProcessTransaction {
             unpackISO8583.strtoiso(response);
             String[] receiving = new String[128];
             Utilities.logISOMsg(unpackISO8583, receiving);
-           transactionResponse =new  TransactionResponse().parseNibssMessage(receiving, requestData.getTransactionType());
+           transactionResponse =new  TransactionResponse().parseNibssMessage(receiving, requestData.getTransactionType(), false);
            requestData.setReversalData(receiving);
            requestData.setOriginalElement(receiving);
 

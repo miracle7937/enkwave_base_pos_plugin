@@ -59,7 +59,9 @@ public class PosTransactions {
 
     public  void  processTransaction(SDKTransactionResult sdkTransactionResult){
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
-            if( transactionResponse.responseCode != null){
+
+            Debug.print("First Request====================>"+ transactionResponse.toString());
+            if( transactionResponse.refresh ==false){
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
                 try {
                     Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();

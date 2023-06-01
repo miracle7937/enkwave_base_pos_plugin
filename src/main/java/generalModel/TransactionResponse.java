@@ -39,6 +39,7 @@ public class TransactionResponse {
     public String AID = "";
     public String appCryptogram = "";
     public long transactionTimeInMillis = 0L;
+    public  boolean refresh = false;
     public IsoAccountType accountType = IsoAccountType.DEFAULT_UNSPECIFIED;
 
     public String terminalId = "";
@@ -54,7 +55,7 @@ public class TransactionResponse {
     public boolean isSuccessful;
 
 
-   public TransactionResponse parseNibssMessage(String[] receiving, TransactionType transactionType   ){
+   public TransactionResponse parseNibssMessage(String[] receiving, TransactionType transactionType, boolean refresh   ){
        this.transactionType = transactionType;
        this.accountType = IsoAccountType.parseIntAccountType(
               Integer.parseInt( receiving[4].substring(
@@ -82,7 +83,8 @@ public class TransactionResponse {
     echoData = !APPUtils.isEmpty(receiving[59]) ? Constants.getResponseMessageFromCode(responseCode) : "";
      transmissionDate = receiving[13];
     transmissionTime = receiving[12];
-       isSuccessful =  !APPUtils.isEmpty(receiving[39]) ? (receiving[39].equalsIgnoreCase("00") || receiving[39].equalsIgnoreCase("00")): false;
+    isSuccessful =  !APPUtils.isEmpty(receiving[39]) ? (receiving[39].equalsIgnoreCase("00") || receiving[39].equalsIgnoreCase("00")): false;
+    this.refresh = refresh;
     return  this;
 
 }
