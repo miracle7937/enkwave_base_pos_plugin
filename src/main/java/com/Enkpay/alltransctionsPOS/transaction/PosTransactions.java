@@ -15,10 +15,7 @@ import generalModel.FundWalletRequestData;
 import generalModel.FundWalletResponseData;
 import generalModel.TransactionRequestData;
 import generalModel.TransactionResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
-import services.KeyValuePairStorage;
 import services.PreferenceBase;
 
 public class PosTransactions {
@@ -66,8 +63,7 @@ public class PosTransactions {
                 try {
                     Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
 
-                    if (fundCustomerWallet.body().status == true && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")) {
-
+                    if (fundCustomerWallet.body().status == true && (transactionResponse.responseCode !="00" || transactionResponse.responseCode =="11")) {
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
                     } else {
