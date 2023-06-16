@@ -53,18 +53,25 @@ public class DownloadNibsKeys {
             Debug.print("nibssClearMasterKey " + keyHolder.nibssClearMasterKey());
             Debug.print("clearSessionKey " +  keyHolder.clearSessionKey());
             Debug.print("clearPinKey " + keyHolder.clearPinKey());
-
-//            new ClearMasterKeyFromExpressPayment().request("11111111111111111111111111111111");
             ConfigData configData= new ParametersDownload2().download(
                     terminalID,
               keyHolder.clearSessionKey()
       );
+            if(!configData.getMnl().isEmpty()){
+                KeyValuePairStorage loadedStorage =  new KeyValuePairStorage(preferenceBase);
+                loadedStorage.put(Constants.PREF_KEYHOLDER, new Gson().toJson(keyHolder));
+                loadedStorage.put(Constants.PREF_CONFIG_DATA, new Gson().toJson(configData));
+                loadedStorage.putLong(Constants.LAST_POS_CONFIGURATION_TIME, System.currentTimeMillis());
+                Debug.print("Fetch from file " +  loadedStorage.get(Constants.PREF_KEYHOLDER));
 
-      KeyValuePairStorage loadedStorage =  new KeyValuePairStorage(preferenceBase);
-      loadedStorage.put(Constants.PREF_KEYHOLDER, new Gson().toJson(keyHolder));
-      loadedStorage.put(Constants.PREF_CONFIG_DATA, new Gson().toJson(configData));
-      loadedStorage.putLong(Constants.LAST_POS_CONFIGURATION_TIME, System.currentTimeMillis());
-      Debug.print("Fetch from file " +  loadedStorage.get(Constants.PREF_KEYHOLDER));
+            }else {
+                Debug.print("=======================================================================");
+                Debug.print("========================Fail to get Parameter=============================================");
+
+
+            }
+
+
             if(intResult != null){
                 intResult.onSuccess();
             }
