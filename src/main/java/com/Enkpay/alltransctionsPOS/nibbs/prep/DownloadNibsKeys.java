@@ -67,7 +67,9 @@ public class DownloadNibsKeys {
             }else {
                 Debug.print("=======================================================================");
                 Debug.print("========================Fail to get Parameter=============================================");
-
+                if(intResult != null){
+                    intResult.onError("Fail to initialize key");
+                }
 
             }
 

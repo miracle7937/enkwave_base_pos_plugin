@@ -68,23 +68,14 @@ public class PosTransactions {
 
                     } else {
 
-
                         if(requestData.getOriginalDataElements() != null){
                             TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);
 
                             sdkTransactionResult.onSuccess(rollBackTransactionResponse, requestData);
-//                        if((response.code() == 200 || response.code() == 201) &&( transactionResponse.responseCode =="00" || transactionResponse.responseCode=="10") ){
 //
-////                            TransactionResponse transactionResponse= rollBack(hostConfig, cardData, requestData);
-//
-//                            sdkTransactionResult.onSuccess(transactionResponse, requestData);
-//
-//                        }
                         }else{
                             sdkTransactionResult.onSuccess(transactionResponse, requestData);
                         }
-
-
 
 
                     }
