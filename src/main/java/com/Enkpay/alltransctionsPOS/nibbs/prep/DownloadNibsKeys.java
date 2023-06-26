@@ -22,14 +22,15 @@ public class DownloadNibsKeys {
 
     public void download(PosTransactions.IntResult intResult, String terminalID) {
         KeyHolder keyHolder = new KeyHolder();
+        Debug.print("Hello " );
         try {
       String encryptedMasterKey =  nibsKeyRequest.get(
               KeyType.MASTER,
               terminalID
       ).substring(0, 32);
       //get clear master from XpressPayment
-//            String clearPinKeyFromExpressPayment=     new ClearMasterKeyFromExpressPayment().request(encryptedMasterKey);
-//            keyHolder.setClearMasterKey(clearPinKeyFromExpressPayment);
+            String clearPinKeyFromExpressPayment=     new ClearMasterKeyFromExpressPayment().request(encryptedMasterKey);
+            keyHolder.setClearMasterKey(clearPinKeyFromExpressPayment);
       String encryptedSessionKey =  nibsKeyRequest.get(
               KeyType.SESSION,
               terminalID
@@ -39,7 +40,7 @@ public class DownloadNibsKeys {
               terminalID
       ).substring(0, 32);
 
-
+            Debug.print("END " );
 
 
             Debug.print("encryptedMasterKey " + encryptedMasterKey);
