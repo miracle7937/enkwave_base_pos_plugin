@@ -21,6 +21,15 @@ public class NibsUtilityData {
 //    String ipAddress  = "196.6.103.18";
 //    Integer ipPort = 5018;
 //    Boolean isSSL  = true;
-//   public static  boolean debug = true;
+
+
+
+
+
+
+
+
+
+   public static  boolean debug = true;
 }
 
