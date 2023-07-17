@@ -46,8 +46,8 @@ public class ProcessTransaction {
                 requestIsoMessage.setBit(28, field28, field28.length);
 
 
-//                byte[] field37 = requestData.getOriginalDataElements().getOriginalRRN().getBytes();
-//                requestIsoMessage.setBit(37, field37, field37.length);
+                byte[] field37 = requestData.getOriginalDataElements().getOriginalRRN().getBytes();
+                requestIsoMessage.setBit(37, field37, field37.length);
 
 
                 byte[] field38 = requestData.getOriginalDataElements().getOriginalAuthorizationCode().getBytes();

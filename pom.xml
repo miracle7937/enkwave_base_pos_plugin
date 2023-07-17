@@ -10,7 +10,7 @@
 <!--	</parent>-->
 	<groupId>com.enkpay</groupId>
 	<artifactId>alltransction_pos</artifactId>
-	<version>0.0.40-DEBUG</version>
+	<version>0.0.41-DEBUG</version>
 	<name>alltransction_pos</name>
 	<description>A springboot pos </description>
 <!--	<properties>-->
