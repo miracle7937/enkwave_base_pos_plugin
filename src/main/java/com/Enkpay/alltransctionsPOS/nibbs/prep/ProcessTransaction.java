@@ -54,6 +54,7 @@ public class ProcessTransaction {
                 byte[] field56 = "4021".getBytes();
                 requestIsoMessage.setBit(56, field56, field56.length);
                 setOriginalTransactionData(requestIsoMessage, requestData, cardData);
+                break;
 
             }
             case PURCHASE: {

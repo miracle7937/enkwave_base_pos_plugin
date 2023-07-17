@@ -62,11 +62,12 @@ public class PosTransactions {
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
                 try {
                     Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
-
+                        //fundCustomerWallet.body().status == false && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")
                     if (false) {
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
                     } else {
+                        System.out.println("original data ==========>"+ requestData.getOriginalDataElements().toString());
                         System.out.println("reversal ===============>");
                         if(requestData.getOriginalDataElements() != null){
                             TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);

@@ -62,8 +62,7 @@ public class TransactionRequestData {
 
 
     public    void   setOriginalElement( String[] receiving ){
-
-       if(receiving == null || receiving.length == 0) {
+       if(receiving != null || receiving.length > 0) {
            originalDataElements = new OriginalDataElements();
            originalDataElements.setTransmissionDateF7(receiving[7]);
            originalDataElements.setOriginalTransmissionDateTime(receiving[7]);
