@@ -244,4 +244,11 @@ public class Utilities {
         return sb.toString();
     }
 
+    public  static  Long convertNairaToKobo(Long amount){
+        return  amount *100;
+    }
+    public  static  Long convertKoboToNaira(Long amount){
+        return  amount /100;
+    }
+
 }

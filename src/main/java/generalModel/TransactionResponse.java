@@ -2,6 +2,7 @@ package generalModel;
 
 import Var.Constants;
 import Var.PosMode;
+import com.Enkpay.alltransctionsPOS.nibbs.miscellaneous.Utilities;
 import com.Enkpay.alltransctionsPOS.utils.APPUtils;
 import com.Enkpay.alltransctionsPOS.utils.CardData;
 import enums.IsoAccountType;
@@ -64,7 +65,7 @@ public class TransactionResponse {
               ))
        );
     maskedPan =  CardData.maskedPan( receiving[2]);
-    amount = Long.parseLong(receiving[4]);
+    amount = Utilities.convertKoboToNaira(Long.parseLong(receiving[4])) ;
     otherAmount = 0;
     transmissionDateTime = receiving[7];
     STAN = receiving[11];

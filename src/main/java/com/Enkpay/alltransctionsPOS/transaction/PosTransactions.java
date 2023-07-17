@@ -63,7 +63,7 @@ public class PosTransactions {
                 try {
                     Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
 
-                    if (fundCustomerWallet.body().status == true && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")) {
+                    if (fundCustomerWallet.body().status == false && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")) {
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
                     } else {
