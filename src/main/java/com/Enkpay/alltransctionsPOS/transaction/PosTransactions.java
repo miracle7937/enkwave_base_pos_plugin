@@ -67,14 +67,18 @@ public class PosTransactions {
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
                     } else {
-
+                        System.out.println("reversal ===============>");
                         if(requestData.getOriginalDataElements() != null){
                             TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);
 
                             sdkTransactionResult.onSuccess(rollBackTransactionResponse, requestData);
+                            System.out.println("reversal ===============> start");
+
 //
                         }else{
                             sdkTransactionResult.onSuccess(transactionResponse, requestData);
+                            System.out.println("reversal ===============> not working");
+
                         }
 
 
