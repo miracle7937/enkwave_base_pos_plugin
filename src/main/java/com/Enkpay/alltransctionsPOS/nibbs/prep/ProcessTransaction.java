@@ -37,8 +37,14 @@ public class ProcessTransaction {
                 byte[] field12 = requestData.getOriginalDataElements().getLocalTimeF12().getBytes();
                 requestIsoMessage.setBit(12, field12, field12.length);
 
-                byte[] field13 = requestData.getOriginalDataElements().getLocalDateF13().getBytes();
+
+                String shorDate=  new IsoTimeManager().getShortDate();
+                byte[] field13 = shorDate.getBytes();
                 requestIsoMessage.setBit(13, field13, field13.length);
+
+                byte[] field28 = "D00000000".getBytes();
+                requestIsoMessage.setBit(28, field28, field28.length);
+
 
                 byte[] field37 = requestData.getOriginalDataElements().getOriginalRRN().getBytes();
                 requestIsoMessage.setBit(37, field37, field37.length);
@@ -165,8 +171,6 @@ public class ProcessTransaction {
     private void setOriginalTransactionData(ISO8583 requestIsoMessage, TransactionRequestData requestData, CardData cardData) {
         if (requestData.getOriginalDataElements() != null) {
             String acqCode2 = cardData.getTrack2Data().substring(0, 6).toUpperCase();
-
-
             String originalElement = "0200" +
                     requestData.getOriginalDataElements().getOriginalSTAN()
                     + requestData.getOriginalDataElements().getOriginalTransmissionDateTime()
