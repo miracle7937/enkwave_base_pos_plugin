@@ -20,7 +20,7 @@ public class AlltransctionPosApplication {
 		try {
 
 //		new ClearMasterKeyFromExpressPayment().request("11111111111111111111111111111111");
-		 new DownloadNibsKeys(new JPreference()).download(null, "2076UT20");
+		 new DownloadNibsKeys(new JPreference()).download(null, "201115FH");
 //			new ParametersDownload().download(
 //					TransactionType.TERMINAL_PARAMETER_DOWNLOAD,
 //					"8767B834",
