@@ -49,10 +49,10 @@ public class ProcessTransaction {
                 byte[] field37 = requestData.getOriginalDataElements().getOriginalRRN().getBytes();
                 requestIsoMessage.setBit(37, field37, field37.length);
 
-                if(requestData.getOriginalDataElements().getOriginalAuthorizationCode() != null){
-                                    byte[] field38 = requestData.getOriginalDataElements().getOriginalAuthorizationCode().getBytes();
+
+                byte[] field38 = requestData.getOriginalDataElements().getOriginalAuthorizationCode().getBytes();
                 requestIsoMessage.setBit(38, field38, field38.length);
-                }
+
 
 
 
@@ -60,19 +60,22 @@ public class ProcessTransaction {
                 byte[] field56 = "4021".getBytes();
                 requestIsoMessage.setBit(56, field56, field56.length);
                 setOriginalTransactionData(requestIsoMessage, requestData, cardData);
+                byte[] field123 = "51011151134C101".getBytes(); // Good
+                requestIsoMessage.setBit(123, field123, field123.length);
                 break;
 
             }
             case PURCHASE: {
-                System.out.println("Purchase");
+                System.out.println("Purchase===========>");
+                byte[] field123 = "510101511344101".getBytes();
+                requestIsoMessage.setBit(123, field123, field123.length);
                 break;
             }
 
         }
 
 
-        byte[] field123 = "510101511344101".getBytes();
-        requestIsoMessage.setBit(123, field123, field123.length);
+
         byte use = 0x0;
         char ch = (char) use;
         byte[] field128 = Character.toString(ch).getBytes();
