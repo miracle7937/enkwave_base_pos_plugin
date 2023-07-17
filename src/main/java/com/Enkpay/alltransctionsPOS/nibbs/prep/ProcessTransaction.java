@@ -31,11 +31,11 @@ public class ProcessTransaction {
 
                 Debug.print("Original==============> "+ requestData.getOriginalDataElements());
 
-                byte[] field11 = requestData.getOriginalDataElements().getOriginalSTAN().getBytes();
-                requestIsoMessage.setBit(11, field11, field11.length);
-
-                byte[] field12 = requestData.getOriginalDataElements().getLocalTimeF12().getBytes();
-                requestIsoMessage.setBit(12, field12, field12.length);
+//                byte[] field11 = requestData.getOriginalDataElements().getOriginalSTAN().getBytes();
+//                requestIsoMessage.setBit(11, field11, field11.length);
+//
+//                byte[] field12 = requestData.getOriginalDataElements().getLocalTimeF12().getBytes();
+//                requestIsoMessage.setBit(12, field12, field12.length);
 
 
                 String shorDate=  new IsoTimeManager().getShortDate();
