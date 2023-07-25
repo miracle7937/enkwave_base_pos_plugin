@@ -245,12 +245,12 @@ public class ProcessTransaction {
         packISO8583.setBit(4, field4, field4.length);
 
 
-        byte[] field7;
-        if (APPUtils.isEmpty(addTransParams.getTransmissionDateF7())) {
-            field7 = transmissionDateAndTime.getBytes();
-        } else {
-            field7 = addTransParams.getTransmissionDateF7().getBytes();
-        }
+        byte[] field7 = transmissionDateAndTime.getBytes();
+//        if (APPUtils.isEmpty(addTransParams.getTransmissionDateF7())) {
+//            field7 = transmissionDateAndTime.getBytes();
+//        } else {
+//            field7 = addTransParams.getTransmissionDateF7().getBytes();
+//        }
         packISO8583.setBit(7, field7, field7.length);
 
 

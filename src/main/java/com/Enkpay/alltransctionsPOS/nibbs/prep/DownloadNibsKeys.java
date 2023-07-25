@@ -26,8 +26,8 @@ public class DownloadNibsKeys {
               terminalID
       ).substring(0, 32);
       //get clear master from XpressPayment
-            String clearPinKeyFromExpressPayment=     new ClearMasterKeyFromExpressPayment().request(encryptedMasterKey);
-            keyHolder.setClearMasterKey(clearPinKeyFromExpressPayment);
+//            String clearPinKeyFromExpressPayment=     new ClearMasterKeyFromExpressPayment().request(encryptedMasterKey);
+//            keyHolder.setClearMasterKey(clearPinKeyFromExpressPayment);
       String encryptedSessionKey =  nibsKeyRequest.get(
               KeyType.SESSION,
               terminalID
