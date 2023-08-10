@@ -3,6 +3,7 @@ package com.Enkpay.alltransctionsPOS.transaction;
 import Var.Constants;
 import Var.DateUtils;
 import Var.Debug;
+import Var.Encryption;
 import com.Enkpay.alltransctionsPOS.implementation.RetrofitBuilder;
 import com.Enkpay.alltransctionsPOS.interswitch.ISWTransaction.ISWInit;
 import com.Enkpay.alltransctionsPOS.interswitch.ISWTransaction.ISWProcessPayment;
@@ -10,11 +11,9 @@ import com.Enkpay.alltransctionsPOS.nibbs.model.HostConfig;
 import com.Enkpay.alltransctionsPOS.nibbs.prep.DownloadNibsKeys;
 import com.Enkpay.alltransctionsPOS.nibbs.prep.ProcessTransaction;
 import com.Enkpay.alltransctionsPOS.utils.CardData;
+import com.google.gson.Gson;
 import enums.TransactionType;
-import generalModel.FundWalletRequestData;
-import generalModel.FundWalletResponseData;
-import generalModel.TransactionRequestData;
-import generalModel.TransactionResponse;
+import generalModel.*;
 import retrofit2.Response;
 import services.PreferenceBase;
 
@@ -56,12 +55,16 @@ public class PosTransactions {
 
     public  void  processTransaction(SDKTransactionResult sdkTransactionResult){
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
-
             Debug.print("First Request====================>"+ transactionResponse.toString());
             if( transactionResponse.refresh ==false){
                 FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
+                String encryptData =   Encryption.encrypt( new Gson().toJson(fundWalletRequestData));
+                System.out.println("Encrypted Data =====>"+ encryptData);
+                System.out.println("Formatted Data"+  new Gson().toJson(fundWalletRequestData));
+                RequestModel requestModel = new RequestModel(encryptData);
                 try {
-                    Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestData).execute();
+
+                    Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(requestModel).execute();
                         //fundCustomerWallet.body().status == false && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")
                     if (false) {
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
@@ -70,12 +73,10 @@ public class PosTransactions {
                         System.out.println("original data ==========>"+ requestData.getOriginalDataElements().toString());
                         System.out.println("reversal ===============>");
                         if(requestData.getOriginalDataElements() != null){
-                            TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);
 
+                            TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);
                             sdkTransactionResult.onSuccess(rollBackTransactionResponse, requestData);
                             System.out.println("reversal ===============> start");
-
-//
                         }else{
                             sdkTransactionResult.onSuccess(transactionResponse, requestData);
                             System.out.println("reversal ===============> not working");
