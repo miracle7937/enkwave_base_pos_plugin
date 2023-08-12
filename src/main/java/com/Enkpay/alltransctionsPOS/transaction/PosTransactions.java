@@ -17,6 +17,8 @@ import generalModel.*;
 import retrofit2.Response;
 import services.PreferenceBase;
 
+import java.io.IOException;
+
 public class PosTransactions {
      HostConfig hostConfig;
    CardData cardData;
@@ -51,60 +53,46 @@ public class PosTransactions {
 
     }
 
-
-
     public  void  processTransaction(SDKTransactionResult sdkTransactionResult){
+        try {
+            FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  null );
+            Response<FundWalletResponseData>  logTransaction=
+                    new RetrofitBuilder().logTransaction().logTransaction(fundWalletRequestData).execute();
+            if(logTransaction.code() == 200){
+                sdkTransactionResult.onError("Transaction Fail to log", requestData);
+                return;
+            }
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
-            Debug.print("First Request====================>"+ transactionResponse.toString());
             if( transactionResponse.refresh ==false){
-                FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
-                String encryptData =   Encryption.encrypt( new Gson().toJson(fundWalletRequestData));
-                System.out.println("Encrypted Data =====>"+ encryptData);
-                System.out.println("Formatted Data"+  new Gson().toJson(fundWalletRequestData));
-                RequestModel requestModel = new RequestModel(encryptData);
-                try {
-
-                    Response<FundWalletResponseData>     fundCustomerWallet =   new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(requestModel).execute();
-                        //fundCustomerWallet.body().status == false && (transactionResponse.responseCode =="00" || transactionResponse.responseCode =="11")
-                    if (false) {
+                FundWalletRequestData fundWalletRequestDataWithResponse = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  null );
+                Response<FundWalletResponseData>     fundCustomerWallet =
+                            new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestDataWithResponse).execute();
+                    if (fundCustomerWallet.body().status == true &&
+                            (transactionResponse.responseCode.equals("00")
+                            || transactionResponse.responseCode.equals("11"))) {
                         sdkTransactionResult.onSuccess(transactionResponse, requestData);
 
                     } else {
-                        System.out.println("original data ==========>"+ requestData.getOriginalDataElements().toString());
-                        System.out.println("reversal ===============>");
-                        if(requestData.getOriginalDataElements() != null){
-
-                            TransactionResponse rollBackTransactionResponse= rollBack(hostConfig, cardData, requestData);
-                            sdkTransactionResult.onSuccess(rollBackTransactionResponse, requestData);
-                            System.out.println("reversal ===============> start");
-                        }else{
-                            sdkTransactionResult.onSuccess(transactionResponse, requestData);
-                            System.out.println("reversal ===============> not working");
-
-                        }
-
+                        sdkTransactionResult.onError(transactionResponse.errorMessage , requestData);
 
                     }
-
-                }catch (Exception e){
-                    sdkTransactionResult.onError(e.getLocalizedMessage(), requestData);
-                }
 
             }else {
                 new DownloadNibsKeys(PosTransactions.this.preferenceBase).download(null, hostConfig.getTerminalId());
                 sdkTransactionResult.onError("Refresh new key", requestData);
 
             }
-
-
-
         });
+
+        }catch (Exception e){
+            sdkTransactionResult.onError(e.getLocalizedMessage(), requestData);
+        }
     }
 
 
 
 
-    public void  selectTransaction( HostConfig hostConfig, CardData cardData, TransactionRequestData requestData ,TransactionResult transactionResult){
+    public void  selectTransaction( HostConfig hostConfig, CardData cardData, TransactionRequestData requestData ,TransactionResult transactionResult) throws IOException {
 
         if(true){
         boolean keyPassedTime=   DateUtils.hourPassed(7, preferenceBase.getLongData(Constants.LAST_POS_CONFIGURATION_TIME));
@@ -146,7 +134,7 @@ the TransactionRequestData request data is for roll backs
 */
     public interface TransactionResult{
 
-        public void onTransactionCompleted(TransactionResponse response, TransactionRequestData requestData);
+        public void onTransactionCompleted(TransactionResponse response, TransactionRequestData requestData) throws IOException;
 
     }
 

@@ -4,6 +4,7 @@ import com.Enkpay.alltransctionsPOS.interswitch.models.AdditionalTransParams;
 import com.Enkpay.alltransctionsPOS.interswitch.models.IswParameters;
 import com.Enkpay.alltransctionsPOS.interswitch.models.MessageReasonCode;
 import com.Enkpay.alltransctionsPOS.interswitch.models.OriginalDataElements;
+import com.Enkpay.alltransctionsPOS.utils.IsoTimeManager;
 import enums.IsoAccountType;
 import enums.TransactionType;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class TransactionRequestData {
     public  IsoAccountType accountType = IsoAccountType.DEFAULT_UNSPECIFIED;
     public  String RRN;
     public  String STAN;
+    public  String UserID;
     public  AdditionalTransParams additionalTransParams = null;
     public  String echoData  = null;
     public  OriginalDataElements originalDataElements = null;
@@ -43,7 +45,7 @@ public class TransactionRequestData {
         this.originalDataElements=originalDataElements;
         this.tlvTags = tags;
         this.refundAmount= refundAmount;
-
+        this.RRN = new IsoTimeManager().getFullDate();
     }
 
 

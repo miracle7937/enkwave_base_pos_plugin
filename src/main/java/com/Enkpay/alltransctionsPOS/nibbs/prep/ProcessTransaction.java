@@ -220,7 +220,7 @@ public class ProcessTransaction {
         String RRN;
         if (APPUtils.isEmpty(requestData.getRRN())) {
             RRN = timeMgr.getFullDate().substring(2, 14);
-            ;
+
         } else {
             RRN = requestData.getRRN();
         }
