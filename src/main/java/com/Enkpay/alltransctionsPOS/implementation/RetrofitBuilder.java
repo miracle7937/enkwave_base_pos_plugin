@@ -16,7 +16,8 @@ public class RetrofitBuilder {
     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
     final String Express_Payment= "http://80.88.8.56:552/";
-    final String EnkPayBaseURL= "https://testpos.enkpay.com/api/";
+//    final String EnkPayBaseURL= "https://testpos.enkpay.com/api/";
+    final String EnkPayBaseURL= "https://enkpayapp.enkwave.com/api/";
 
 
 
