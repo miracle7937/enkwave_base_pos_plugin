@@ -12,12 +12,16 @@ public interface FundWalletService {
 
 
     @Headers({
-            "data_key: $2y$10$Dzn4DW2CvCf7sfMUxq6.QOussHZE/jXrE8SFSu7EoJjjJy/LYlphe",
+            "dataKey: $2y$10$Dzn4DW2CvCf7sfMUxq6.QOussHZE/jXrE8SFSu7EoJjjJy/LYlphe",
     })
     @POST("pos")
     Call<FundWalletResponseData> fundCustomerWallet(@Body FundWalletRequestData encryptedBody);
 
 
+
+    @Headers({
+            "dataKey: $2y$10$Dzn4DW2CvCf7sfMUxq6.QOussHZE/jXrE8SFSu7EoJjjJy/LYlphe",
+    })
     @POST("pos-logs")
     Call<FundWalletResponseData> logTransaction(@Body FundWalletRequestData encryptedBody);
 }

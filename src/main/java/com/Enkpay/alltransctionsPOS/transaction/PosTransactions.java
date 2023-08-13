@@ -64,7 +64,8 @@ public class PosTransactions {
             }
         selectTransaction(hostConfig,cardData,requestData, (transactionResponse, requestData) -> {
             if( transactionResponse.refresh ==false){
-                FundWalletRequestData fundWalletRequestDataWithResponse = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  null );
+                FundWalletRequestData fundWalletRequestDataWithResponse =
+                        new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  transactionResponse );
                 Response<FundWalletResponseData>     fundCustomerWallet =
                             new RetrofitBuilder().isFundUserWallet().fundCustomerWallet(fundWalletRequestDataWithResponse).execute();
                     if (fundCustomerWallet.body().status == true &&
@@ -85,6 +86,7 @@ public class PosTransactions {
         });
 
         }catch (Exception e){
+            System.out.println(e.fillInStackTrace());
             sdkTransactionResult.onError(e.getLocalizedMessage(), requestData);
         }
     }

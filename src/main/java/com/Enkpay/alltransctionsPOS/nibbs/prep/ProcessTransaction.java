@@ -4,7 +4,6 @@ import Var.Debug;
 import com.Enkpay.alltransctionsPOS.interswitch.models.AdditionalTransParams;
 import com.Enkpay.alltransctionsPOS.nibbs.miscellaneous.*;
 import com.Enkpay.alltransctionsPOS.nibbs.model.HostConfig;
-import com.Enkpay.alltransctionsPOS.transaction.PosTransactions;
 import com.Enkpay.alltransctionsPOS.utils.APPUtils;
 import com.Enkpay.alltransctionsPOS.utils.CardData;
 import com.Enkpay.alltransctionsPOS.utils.IsoTimeManager;
