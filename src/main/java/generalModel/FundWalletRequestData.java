@@ -12,7 +12,7 @@ public class FundWalletRequestData {
     TransactionType transactionType;
     String RRN, STAN, pan, cardName, deviceNO, responseCode;
     Boolean status;
-    String userID;
+    String UserID;
     public FundWalletRequestData(CardData cardData, TransactionRequestData requestData,
                                  HostConfig hostConfig, TransactionResponse transactionResponse){
         this.terminalID = hostConfig.getTerminalId();
@@ -22,7 +22,7 @@ public class FundWalletRequestData {
         this.pan = cardData.getMaskedPan();
         this.cardName = cardData.getCardName();
         this.RRN  =   requestData.getRRN() != null? requestData.getRRN(): "" ;
-        this.userID = requestData.getUserID();
+        this.UserID = requestData.getUserID();
         if(transactionResponse != null){
             this.STAN = transactionResponse.getSTAN();
             this.RRN = transactionResponse.getRRN();

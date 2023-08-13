@@ -58,7 +58,7 @@ public class PosTransactions {
             FundWalletRequestData fundWalletRequestData = new FundWalletRequestData(PosTransactions.this.cardData, requestData,hostConfig,  null );
             Response<FundWalletResponseData>  logTransaction=
                     new RetrofitBuilder().logTransaction().logTransaction(fundWalletRequestData).execute();
-            if(logTransaction.code() == 200){
+            if(logTransaction.code() != 200){
                 sdkTransactionResult.onError("Transaction Fail to log", requestData);
                 return;
             }
